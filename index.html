@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sioltalife Educación Continua - Investigación Clínica</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets//favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets//favicon-16x16.png">
+    <link rel="manifest" href="assets//site.webmanifest">
+    <style>
+        :root {
+            --primary: #2D71B8;
+            --secondary: #1a4d8c;
+            --accent: #3F8FD2;
+            --light: #F0F7FF;
+            --dark: #1f1f1f;
+            --text: #333;
+            --gray: #6c757d;
+            --white: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8fcff 0%, #e6f2ff 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* HEADER CON NOMBRE DEL CURSO */
+        .full-width-header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .course-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-left: 15px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(45, 113, 184, 0.2);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Contenido principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            margin: 0 auto 40px;
+            position: relative;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: var(--radius);
+            color: white;
+            overflow: hidden;
+            max-width: 1200px;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+            z-index: 0;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--white);
+            color: var(--primary);
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border: 2px solid transparent;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--white);
+            color: var(--white);
+            margin-left: 15px;
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        /* Modules Section */
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--dark);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .module-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(45, 113, 184, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .module-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+        
+        .module-header {
+            padding: 25px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .module-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            line-height: 40px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .module-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .module-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .module-content ul {
+            list-style: none;
+            flex-grow: 1;
+        }
+        
+        .module-content li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .module-content li:last-child {
+            border-bottom: none;
+        }
+        
+        .module-content li i {
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+        
+        .module-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            background: var(--primary);
+            color: white;
+        }
+        
+        .module-btn:hover {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        /* Features Section */
+        .features {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 60px 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 80px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: var(--radius);
+            transition: var(--transition);
+            background: var(--light);
+            border: 1px solid rgba(45, 113, 184, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .feature-card:hover {
+            background: var(--white);
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 28px;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        /* Estilos específicos para los logos de certificación - AJUSTADOS */
+        .cert-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            flex-wrap: wrap;
+        }
+
+        .cert-logo-img {
+            height: 80px; /* Tamaño aumentado de 50px a 80px */
+            width: auto;
+            object-fit: contain;
+            filter: grayscale(15%);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .cert-logo-img {
+            filter: grayscale(0%);
+            transform: scale(1.1); /* Escala ligeramente mayor para resaltar más */
+        }
+        
+        /* SECCIÓN DE TESTIMONIOS HOMOGENIZADA */
+        .testimonials {
+            margin-bottom: 80px;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .testimonial-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 40px 30px 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(45, 113, 184, 0.1);
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+        
+        .testimonial-text {
+            color: var(--text);
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 25px;
+            text-align: justify;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+        
+        .testimonial-text::before {
+            content: "\f10d";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            font-size: 2rem;
+            color: var(--primary);
+            opacity: 0.1;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            padding-top: 20px;
+        }
+        
+        .author-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            object-fit: cover;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .author-info h4 {
+            margin: 0;
+            color: var(--dark);
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        
+        .author-info p {
+            margin: 2px 0 5px;
+            color: var(--gray);
+            font-size: 0.85rem;
+            line-height: 1.3;
+        }
+
+        .linkedin-link {
+            text-decoration: none;
+            color: #0077b5;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .linkedin-link:hover {
+            opacity: 0.8;
+        }
+        
+        /* Call to Action */
+        .cta {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: var(--radius);
+            padding: 80px 40px;
+            text-align: center;
+            color: white;
+            margin-bottom: 80px;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .cta-btn {
+            background: var(--white);
+            color: var(--primary);
+        }
+        
+        /* FOOTER DE ANCHO COMPLETO */
+        .full-width-footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: auto;
+            width: 100%;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+                padding: 15px 0;
+            }
+            
+            .logo-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .course-name {
+                margin-left: 0;
+                padding-left: 0;
+                border-left: none;
+                border-top: 2px solid rgba(45, 113, 184, 0.2);
+                padding-top: 10px;
+                margin-top: 10px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .btn {
+                display: block;
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .logo-img {
+                height: 40px;
+            }
+            
+            .footer-grid {
+                gap: 30px;
+            }
+
+            .cert-logos {
+                gap: 15px;
+            }
+            
+            .cert-logo-img {
+                height: 60px; /* Tamaño optimizado para móviles (mayor impacto visual) */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="full-width-header">
+        <div class="header-container">
+            <div class="logo-container">
+                <div class="logo">
+                    <a href="#">
+                        <img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_300,w_300,f_auto,q_auto/1187729/437761_723752.png" 
+                             alt="Logo Academia Digital" 
+                             class="logo-img">
+                    </a>
+                    <div class="course-name">Sioltalife Educación Continua</div>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="#modules"><i class="fas fa-book"></i> Módulos</a></li>
+                    <li><a href="calendar.html"><i class="fas fa-calendar"></i> Calendario</a></li>
+                    <li><a href="support.html"><i class="fas fa-question-circle"></i> Soporte</a></li>
+                    <li><a href="glossary.html"><i class="fas fa-book-open"></i> Glosario</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Introducción a la investigación clínica y su campo laboral en México</h1>
+                <h2>Descubre tu lugar en la investigación clínica</h2>
+                <p>Este curso te ofrece una visión clara y práctica de cómo funciona la industria de la investigación clínica. A lo largo del recorrido, conocerás los conceptos clave, el marco ético-regulatorio y los distintos roles que la conforman. Aprovecha cada módulo para identificar el perfil que mejor se alinea contigo y dar forma a tu desarrollo profesional en este campo.</p>
+                <div class="hero-btns">
+                       <a href="#modules" class="btn btn-outline">Ver programa</a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="modules">
+            <h2 class="section-title">Módulos del Curso</h2>
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-number">1</div>
+                        <h3 class="module-title">Introducción a la Investigación Clínica</h3>
+                    </div>
+                    <div class="module-content">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Historia y evolución de la Investigación Clínica.</li>
+                            <li><i class="fas fa-check-circle"></i> Proceso de descubrimiento y etapa preclínica.</li>
+                            <li><i class="fas fa-check-circle"></i> Definición y conceptos fundamentales de IC y EC.</li>
+                            <li><i class="fas fa-check-circle"></i> Fases del Desarrollo Clínico: Fase 0, I (PK/PD), II, III y IV.</li>
+                        </ul>
+                        <a href="mod-1.html" class="btn module-btn">Acceder al módulo</a>
+                    </div>
+                </div>
+                
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-number">2</div>
+                        <h3 class="module-title">Metodología, Bioestadística y Diseños de Investigación</h3>
+                    </div>
+                    <div class="module-content">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Metodologías: Observacionales vs. Experimentales.</li>
+                            <li><i class="fas fa-check-circle"></i> Tipos de variables: Identificación y operacionalización.</li>
+                            <li><i class="fas fa-check-circle"></i> Tamaño muestral: Poder estadístico y margen de error.</li>
+                            <li><i class="fas fa-check-circle"></i> Análisis de datos e interpretación de resultados.</li>
+                            <li><i class="fas fa-check-circle"></i> Diseños Innovadores: Adaptativos, Basket y Umbrella.</li>
+                            <li><i class="fas fa-check-circle"></i> Control de calidad: Sesgos, cegamiento y aleatorización.</li>
+                        </ul>
+                        <a href="mod-2.html" class="btn module-btn">Acceder al módulo</a>
+                    </div>
+                </div>
+                
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-number">3</div>
+                        <h3 class="module-title">Ética en la investigación clínica: un punto de vista práctico.</h3>
+                    </div>
+                    <div class="module-content">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Principios éticos en investigación clínica.</li>
+                            <li><i class="fas fa-check-circle"></i> Origen histórico de la ética y marcos regulatorios.</li>
+                            <li><i class="fas fa-check-circle"></i> Documentos y lineamientos internacionales y nacionales.</li>
+                            <li><i class="fas fa-check-circle"></i> Protección de los participantes en estudios clínicos.</li>
+                            <li><i class="fas fa-check-circle"></i> Dilemas éticos en la práctica profesional.</li>
+                        </ul>
+                        <a href="mod-3.html" class="btn module-btn">Acceder al módulo</a>
+                    </div>
+                </div>
+                
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-number">4</div>
+                        <h3 class="module-title">Regulación en estudios clínicos</h3>
+                    </div>
+                    <div class="module-content">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Regulación mexicana.</li>
+                            <li><i class="fas fa-check-circle"></i> Regulación estadounidense.</li>
+                            <li><i class="fas fa-check-circle"></i> Regulación en la Unión Europea.</li>
+                            <li><i class="fas fa-check-circle"></i> Ventajas y desventajas entre marcos regulatorios.</li>
+                            <li><i class="fas fa-check-circle"></i> Organismos internacionales.</li>
+                        </ul>
+                        <a href="mod-4.html" class="btn module-btn">Acceder al módulo</a>
+                    </div>
+                </div>
+                
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-number">5</div>
+                        <h3 class="module-title">Buenas Prácticas Clínicas, Documentos Esenciales y Buenas Prácticas de Documentación.</h3>
+                    </div>
+                    <div class="module-content">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Buenas Prácticas Clínicas (BPC): fundamentos y 13 principios (R2)</li>
+                            <li><i class="fas fa-check-circle"></i> Documentos Esenciales en investigación clínica (enfoque práctico)</li>
+                            <li><i class="fas fa-check-circle"></i> Protocolo clínico como documento rector (taller de revisión)</li>
+                            <li><i class="fas fa-check-circle"></i> Buenas Prácticas de Documentación (BPD) y ALCOA++</li>
+                            <li><i class="fas fa-check-circle"></i> Taller de documentación: errores comunes y estrategias de mejora</li>
+                        </ul>
+                        <a href="mod-5.html" class="btn module-btn">Acceder al módulo</a>
+                    </div>
+                </div>
+                
+                <div class="module-card">
+                    <div class="module-header">
+                        <div class="module-number">6</div>
+                        <h3 class="module-title">El campo laboral de la investigación clínica</h3>
+                    </div>
+                    <div class="module-content">
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> ¿Por qué investigación clínica?</li>
+                            <li><i class="fas fa-check-circle"></i> Los principales actores de la investigación clínica</li>
+                            <li><i class="fas fa-check-circle"></i> Roles de entrada en la industria biofarmacéutica</li>
+                            <li><i class="fas fa-check-circle"></i> Roles de entrada en una CRO</li>
+                            <li><i class="fas fa-check-circle"></i> Competencias y habilidades clave</li>
+                        </ul>
+                        <a href="mod-6.html" class="btn module-btn">Acceder al módulo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="features">
+            <h2 class="section-title">Beneficios del Curso</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="feature-title">Aprendizaje Práctico</h3>
+                    <p>Actividades reales del día a día que puedes conocer los diferentes roles</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="feature-title">Comunidad Activa</h3>
+                    <p>Acceso a nuestra comunidad de estudiantes y profesionales para networking.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3 class="feature-title">Oportunidades Laborales</h3>
+                    <p>En las próximas etapas te prepararemos para tus entrevistas y que puedas conseguir el puesto que buscas</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 class="feature-title">Certificación</h3>
+                    <p>Certificado de cumplimiento al completar el curso con aval académico de la Facultad de Farmacia de la Universidad Autónoma del Estado de Morelos.</p>
+                    <div class="cert-logos">
+                        <img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_auto/1187729/671193_755538.png" alt="Logo UAEM" class="cert-logo-img">
+                        <img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_9000,w_1200,f_auto,q_auto/1187729/241948_457655.png" alt="Logo Facultad de Farmacia" class="cert-logo-img">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="testimonials">
+            <h2 class="section-title">Testimonios de Estudiantes</h2>
+            <div class="testimonial-grid">
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        <br>
+                        Mi experiencia en el curso “Introducción a la Investigación Clínica y su campo laboral en México” fue sumamente enriquecedora. Me motivó a seguir formándome en el ámbito de la investigación y a continuar participando en más cursos. Síoltalife se distingue por contar con docentes que realmente inspiran, ofreciendo una excelente calidad académica y una relación cercana entre profesores y estudiantes. El feedback constante resulta muy valioso para consolidar los conocimientos adquiridos.
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://media.licdn.com/dms/image/v2/D5603AQEOr--8sunawQ/profile-displayphoto-scale_200_200/B56ZoCyP5FKAAY-/0/1760983321142?e=1774483200&v=beta&t=TUdGujBkNtTLvPCl7pSx_4ZngoR2YZ-CRH4nEoh0lH8" alt="Fernanda Cervantes" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Fernanda Cervantes</h4>
+                            <p>Estudiante de Licenciatura en Biotecnología</p>
+                            <a href="https://www.linkedin.com/in/maria-cervantes-499790388/" target="_blank" class="linkedin-link">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        <br>
+                        El curso de investigación clínica impartido por Síoltalife me encantó y me está siendo de gran utilidad en mi trabajo del día a día, en materia de asuntos regulatorios. El curso me ayudó a comprender los conceptos, los principios y los criterios para evaluar la parte clínica de los dossieres de registro en formato CTD. Los ponentes son muy experimentados y fueron generosos al compartir con nosotros sus conocimientos y experiencia. Finalmente, y no menos importante, el curso es muy interactivo por lo que a través de casos de estudio pude afianzar los conocimientos adquiridos. Yo recomiendo ampliamente este curso y espero que Síoltalife desarrolle más cursos sobre investigación clínica para tomarlos y seguir desarrollando mis competencias en esta materia." Mil gracias Síoltalife por instruirme y ayudarme a desarrollar nuevas competencias.
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://media.licdn.com/dms/image/v2/D4E03AQHIRdFRrWITBQ/profile-displayphoto-crop_800_800/B4EZpgVzMFKYAI-/0/1762552919164?e=1774483200&v=beta&t=JNe54mg7ra-QPpnj0M2KQm0KSh4JrNDOnrmwYiBnGso" alt="Lourdes Molina" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Lourdes Molina</h4>
+                            <p>Directora</p>
+                            <a href="https://www.linkedin.com/in/lourdes-amelia-molina-rinc%C3%B3n-72220272/" target="_blank" class="linkedin-link">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        <br>
+                        Cursar Introducción a la Investigación Clínica fue descubrir que la ciencia también tiene alma. Aprendí que detrás de cada protocolo hay ética, detrás de cada dato hay esperanza, y que la verdadera medicina se construye con rigor, compasión y respeto por la vida. Recomiendo este curso que con pasión mis amigos de Síoltalife han preparado. Los docentes son de lo mejor. Han despejado todas mis dudas y me han dado un legado: un método para leer, no solo para investigar. Para analizar, no solo para trabajar. Enseñar a enseñar es la parte más valiosa que un líder puede heredar a sus alumnos. Gracias totales.
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://media.licdn.com/dms/image/v2/D4D03AQEX7sDlGa_bGw/profile-displayphoto-scale_200_200/B4DZywe8ZYGQAY-/0/1772487464960?e=1774483200&v=beta&t=MaqX49dzws5Fabf8RzMUBlMuSMz-UkRpVDkC27qVcAE" alt="María del Carmen Tello" class="author-avatar">
+                        <div class="author-info">
+                            <h4>María del Carmen Tello</h4>
+                            <p>Gerente Comercial</p>
+                            <a href="https://www.linkedin.com/in/maria-del-carmen-tello-vaca-92318038/" target="_blank" class="linkedin-link">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        <br>
+                        Tomé la primera edición del curso Introducción a la Investigación Clínica y su Campo Laboral en México y me pareció una experiencia sumamente enriquecedora; es un curso muy completo que aborda no solo los aspectos regulatorios, sino también la ejecución práctica de los estudios clínicos, incluyendo temas técnicos y éticos fundamentales al trabajar con seres humanos, especialmente en un contexto como el mexicano, donde la falta de infraestructura ha limitado el desarrollo de medicamentos innovadores; además, el cierre del curso enfocado en la aplicación laboral, impartido por una profesional con experiencia internacional en CROs, abre nuevas oportunidades para estudiantes y profesionales del área farmacéutica más allá de la producción o I+D, como en monitoreo clínico, y valoré mucho las actividades individuales y en equipo que me permitieron adentrarme de forma práctica en este campo tan necesario y fascinante.
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://media.licdn.com/dms/image/v2/C4E03AQFUiDlWRKhGxA/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1599061991858?e=1774483200&v=beta&t=UFYbTk72tgZlJGtwf6TxjbBik7E-pxfDpLIMdXnTCk4" alt="Crystal Columba" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Crystal Columba</h4>
+                            <p>Docente Regulacion Sanitaria y Regulación Farmacéutica</p>
+                            <a href="https://www.linkedin.com/in/maria-crystal-columba-palomares-531aa16a/" target="_blank" class="linkedin-link">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        <br>
+                        El curso 'Introducción a la Investigación clínica en México' me pareció sumamente enriquecedora. Me ayudó a comprender las fases del desarrollo clínico, la ética en la investigación clínica, así como el marco regulatorio en México, en EE.UU. y en la Unión Europea y las principales diferencias entre ellos. También se abordaron los principios de las buenas prácticas clínicas y el campo laboral en la investigación clínica. Fue justo lo que necesitaba para entender cómo trasladar mi experiencia en ciencia básica al ámbito clínico. Lo recomiendo especialmente a quienes buscan iniciarse en este campo con una base sólida y con una perspectiva clara sobre cómo se hace investigación clínica en México.
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://media.licdn.com/dms/image/v2/D5603AQHuuvFNaJZXWQ/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1715106604282?e=1774483200&v=beta&t=SwvQjFpenGeeQqLRNJv60R3jlA9nMInLUyFbZPVOFXU" alt="Angélica Gutiérrez" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Angélica Gutiérrez</h4>
+                            <p>Estudiante Doctorado en Ciencias Bioquímicas</p>
+                            <a href="https://www.linkedin.com/in/ang%C3%A9lica-guti%C3%A9rrez-mata-a3122b162/" target="_blank" class="linkedin-link">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">
+                        <br>
+                        Soy Mónica Mosco, QFB de formación, y tomé el curso Introducción a la Investigación Clínica porque no encontraba capacitaciones en español sobre este campo tan específico; el temario me pareció muy atractivo y cada sesión superó mis expectativas gracias a ponentes altamente experimentados y accesibles, además de actividades dinámicas que facilitan la comprensión práctica de los conceptos, reforzadas por tareas con retroalimentación detallada que amplían tu perspectiva; este curso me permitió profundizar en temas clave como la ética y las buenas prácticas clínicas, y sin duda lo recomendaría a cualquier persona interesada en comenzar su camino en el mundo de la investigación clínica.
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://media.licdn.com/dms/image/v2/D5603AQH593sP9VIeyw/profile-displayphoto-scale_200_200/B56Zm7SUykJ8AY-/0/1759783767745?e=1774483200&v=beta&t=7ssnfG6P6kBMUbltgIfICkcTVThtA8DC5wU2Q-22FbQ" alt="Mónica Mosco" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Mónica Mosco</h4>
+                            <p>Consultora temas patentes y asuntos regulatorios</p>
+                            <a href="https://www.linkedin.com/in/m%C3%B3nica-elisa-mosco-rojas-91a5771b6/" target="_blank" class="linkedin-link">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+                    
+        <section class="cta">
+            <h2>Comencemos a construir tu carrera profesional en investigación clínica</h2>
+            <p>Sé parte de este gran programa</p>
+            <a href="#" class="btn cta-btn">Comienza ahora</a>
+        </section>
+    </div>
+
+    <footer class="full-width-footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Sioltalife Educación Continua</h3>
+                    <p>Impulsando tu carrera con formación de calidad en investigación clínica y crecimiento profesional.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/sioltalife" class="sub-link" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.tiktok.com/@sioltalife" class="sub-link" target="_blank"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.youtube.com/@SioltalifeEducaci%C3%B3nContinua" class="sub-link" target="_blank"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.linkedin.com/company/s%C3%ADoltalife/" class="sub-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+                        <li><a href="#modules"><i class="fas fa-chevron-right"></i> Módulos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Recursos</h3>
+                    <ul>
+                        <li><a href="calendar.html"><i class="fas fa-chevron-right"></i> Calendario de Sesiones</a></li>
+                        <li><a href="glossary.html"><i class="fas fa-chevron-right"></i> Glosario </a></li>
+                        <li><a href="support.html#foro"><i class="fas fa-chevron-right"></i> Foro de Discusión</a></li>
+                        <li><a href="support.html#faqs"><i class="fas fa-chevron-right"></i> Preguntas Frecuentes</a></li>
+                        <li><a href="support.html#experts"><i class="fas fa-chevron-right"></i> Centro de Ayuda</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><a href="mailto:ventas@sioltalife.com"><i class="fas fa-envelope"></i> ventas@sioltalife.com</a></li>
+                        <li><a href="http://wa.link/kcfonq" target="_blank"><i class="fas fa-phone"></i> +52 (729) 184-8814</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Sioltalife. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

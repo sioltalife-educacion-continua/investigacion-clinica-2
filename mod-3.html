@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 3  | Ética en la investigación clínica: un punto de vista práctico.</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets//favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets//favicon-16x16.png">
+    <link rel="manifest" href="assets//site.webmanifest">
+    <style>
+        :root {
+            --primary: #2D71B8;
+            --secondary: #1a4d8c;
+            --accent: #3F8FD2;
+            --light: #F0F7FF;
+            --dark: #1f1f1f;
+            --text: #333;
+            --gray: #6c757d;
+            --white: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8fcff 0%, #e6f2ff 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* HEADER - IDÉNTICO AL LANDING PAGE */
+        .main-header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0 20px;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Contenido principal */
+        .main-content {
+            flex: 1;
+            padding: 20px 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .module-hero {
+            text-align: center;
+            padding: 40px 20px;
+            margin: 0 auto 40px;
+            max-width: 1200px;
+        }
+        
+        .module-page-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .module-page-subtitle {
+            text-align: center;
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .module-description {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 1px solid rgba(45, 113, 184, 0.1);
+        }
+        
+        /* Linktree Grid */
+        .linktree-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(1000px, 1fr));
+            gap: 50px;
+            margin-bottom: 100px;
+        }
+        
+        .link-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(45, 113, 184, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary);
+        }
+        
+        .link-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 50%;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .link-title {
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .link-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            flex-grow: 1;
+            line-height: 1.7;
+        }
+        
+        .link-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 14px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            border: 2px solid transparent;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .link-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(45, 113, 184, 0.3);
+        }
+        
+        .link-btn i {
+            margin-left: 8px;
+            font-size: 0.9em;
+        }
+        
+        /* Module Navigation */
+        .module-nav {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 0;
+        }
+        
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        
+        .nav-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(45, 113, 184, 0.3);
+        }
+        
+        .nav-btn i {
+            margin-right: 8px;
+        }
+
+        
+/* A revisar   */
+        .dropdown-content {
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .sub-link {
+            background-color: #fff;
+            border: 1px solid #2D71B8;
+            border-radius: 6px;
+            padding: 0.75rem;
+            color: #2D71B8;
+            font-weight: 500;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .sub-link:hover {
+            background-color: #2D71B8;
+            color: white;
+        }  
+
+/* Tarjetas con Dropdownlist  */
+       .dropdown-content {
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.sub-link {
+  background-color: var(--white);
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.sub-link:hover {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+ /* FOOTER DE ANCHO COMPLETO */
+        .full-width-footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: auto;
+            width: 100%;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }      
+
+        
+        /* FOOTER - IDÉNTICO AL LANDING PAGE */
+        .main-footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
+            color: white;
+            padding: 60px 0 30px;
+            border-radius: var(--radius) var(--radius) 0 0;
+            margin-top: auto;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+                padding: 15px 0;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .module-page-title {
+                font-size: 2rem;
+            }
+            
+            .logo-img {
+                height: 40px;
+            }
+            
+            .module-nav {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            .linktree-grid {
+                gap: 20px;
+            }
+            
+            .footer-grid {
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header idéntico al de la landing page -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="#">
+                    <img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_300,w_300,f_auto,q_auto/1187729/437761_723752.png" 
+                         alt="Logo Academia Digital" 
+                         class="logo-img">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="index.html#modules"><i class="fas fa-book"></i> Módulos</a></li>
+                    <li><a href="calendar.html"><i class="fas fa-calendar"></i> Calendario</a></li>
+                    <li><a href="support.html"><i class="fas fa-question-circle"></i> Soporte</a></li>
+                    <li><a href="glossary.html"><i class="fas fa-book-open"></i> Glosario</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="module-hero">
+                <h1 class="module-page-title">Módulo 3: Ética en la investigación clínica: un punto de vista práctico.</h1>
+                <p class="module-page-subtitle">Material de consulta y recursos para el módulo</p>
+                
+                <div class="module-description" style="text-align: justify; line-height: 1.6;">
+                    
+                        <p>
+        Este tercer bloque constituye el <strong>eje ético y normativo</strong> de la formación. En él, analizaremos los <strong>principios fundamentales</strong> que rigen la investigación en seres humanos, comprendiendo que la integridad y <strong>protección del participante</strong> deben prevalecer siempre sobre los intereses de la ciencia o la industria.
+    </p>
+    
+    <p><br>
+        El objetivo es dominar el marco normativo que garantiza la seguridad en los estudios desde una perspectiva aplicada. Transitaremos desde los hitos internacionales hasta la <strong>regulación mexicana</strong> vigente, profundizando en el papel crítico que desempeñan los organismos colegiados: el <strong>Comité de Ética en Investigación (CEI)</strong>, el <strong>Comité de Investigación (CI)</strong> y el <strong>Comité de Bioseguridad</strong>.
+    </p>
+
+    <div style="margin-top: 30px; padding: 20px 40px; background-color: #fcfcfc; border-radius: 10px; border: 1px solid #e1e8ed;">
+        <h3 style="margin-top: 0; color: #2c3e50; text-align: left;">¿Qué aprenderás en este bloque?</h3>
+        
+        <ul style="list-style-type: none; padding-left: 0;">
+            <li style="margin-bottom: 15px; display: flex; align-items: baseline;">
+                <span style="color: #3498db; font-size: 1.2em; margin-right: 10px;">•</span>
+                <span><strong>Principios Éticos:</strong> Analizarás los fundamentos de justicia y autonomía que dictan las pautas para la <strong>investigación clínica</strong> profesional.</span>
+            </li>
+            <li style="margin-bottom: 15px; display: flex; align-items: baseline;">
+                <span style="color: #3498db; font-size: 1.2em; margin-right: 10px;">•</span>
+                <span><strong>Marco Normativo:</strong> Estudiarás la aplicación de la <strong>Ley General de Salud</strong> y la <strong>NOM-012-SSA3-2012</strong> en proyectos con seres humanos.</span>
+            </li>
+            <li style="margin-bottom: 15px; display: flex; align-items: baseline;">
+                <span style="color: #3498db; font-size: 1.2em; margin-right: 10px;">•</span>
+                <span><strong>Comités de Vigilancia:</strong> Comprenderás las funciones del <strong>Comité de Investigación, Ética y Bioseguridad</strong> en la supervisión de protocolos.</span>
+            </li>
+            <li style="margin-bottom: 15px; display: flex; align-items: baseline;">
+                <span style="color: #3498db; font-size: 1.2em; margin-right: 10px;">•</span>
+                <span><strong>Gestión de Riesgos:</strong> Identificarás los <strong>niveles de riesgo</strong> y las estrategias del protocolo para minimizarlos.</span>
+            </li>
+            <li style="margin-bottom: 0; display: flex; align-items: baseline;">
+                <span style="color: #3498db; font-size: 1.2em; margin-right: 10px;">•</span>
+                <span><strong>Consentimiento Informado:</strong> Dominarás el proceso ético del consentimiento y asentimiento, identificando y mitigando <strong>errores comunes</strong>.</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+                </div>
+            </section>
+            
+            <section class="linktree-section">
+                <div class="linktree-grid">
+                    <!-- Actividad Disclaimer -->
+                    <div class="link-card">
+                        <div class="link-number"> </div>
+                        <h3 class="link-title">Actividades del Módulo y Material de Soporte</h3>
+                        <p class="link-desc">Las actividades del Módulo, el Material de Soporte y las actividades para después de la sesión se encontrarán disponibles un par de horas antes de arrancar la sesión. </p>
+                        
+                    </div>
+
+                    <!-- Material de Previo a la Clase 
+                    <div class="link-card">
+                    <div class="link-number"></div>
+                    <div class="link-title">Material para revisar antes de la clase</div>
+                    <div class="link-desc"><p>
+                        En el siguiente enlace encontrarás información que te recomendamos revisar antes de la sesión, durante la sesión se profundizará acerca de los temas de estos documentos.
+                    <p> Para cada documento te recomendamos que <strong>enfoques la revisión </strong>en los siguientes títulos/apartados:</p>
+                    <br>                            
+                    <li>Ley General de Salud: <strong>Título Quinto</strong></li>
+                    <li>Reglamento de la Ley General de Salud en Materia de Investigación para la Salud: <strong>Título Segundo</strong></li>
+                    <li>NOM-012-SSA3-2012: Que establece los criterios para la ejecución de proyectos de investigación para la salud en seres humanos: <strong>Sección: Consentimiento y Aspectos Éticos</strong></li>
+                    <br>
+                </div>
+
+                    <button class="link-btn" onclick="toggleDropdown('actividad3')">
+                        Mostrar Enlaces
+                        <i class="fas fa-link"></i>
+                    </button>
+
+                    <div class="dropdown-content" id="actividad3">
+                        <a href="https://www.diputados.gob.mx/LeyesBiblio/pdf/LGS.pdf" class="sub-link" target="_blank" rel="noopener noreferrer">Ley General de Salud</a>
+                        <a href="https://www.diputados.gob.mx/LeyesBiblio/regley/Reg_LGS_MIS.pdf" class="sub-link" target="_blank" rel="noopener noreferrer">Reglamento de la Ley General de Salud en Materia de Investigación para la Salud</a>
+                        <a href="https://www.dof.gob.mx/nota_detalle.php?codigo=5284148&fecha=04/01/2013#gsc.tab=0" class="sub-link" target="_blank" rel="noopener noreferrer">NOM-012-SSA3-2012: Que establece los criterios para la ejecución de proyectos de investigación para la salud en seres humanos.</a>
+                                                
+                </div>             
+                </div>
+                                -->  
+                <!-- Actividad 1 
+                    <div class="link-card">
+                        <div class="link-number"> 1 </div>
+                        <h3 class="link-title">Actividad 1 - ¿Qué es la Investigación Clínica?</h3>
+                        <p class="link-desc">Lluvia de Ideas: ¿Qué es la Investigación Clínica? ¿Cuál es el fin de la Investigación Clínica? </p>
+                        <a href="https://www.menti.com/alksfcuq18g2" target="_blank" rel="noopener noreferrer" class="link-btn">Accede la lluvia de ideas <i class="fas fa-cloud"></i></a>
+                    </div>
+-->
+                    <!-- Actividad 2 
+                    <div class="link-card">
+                        <div class="link-number"> 2 </div>
+                        <h3 class="link-title">Actividad 2 - ¿Participarías en la investigación del anuncio?</h3>
+                        <p class="link-desc">Analiza el anuncio/cartel presentado y responde si particiaparías o no en la investigación. </p>
+                        <a href="https://www.menti.com/alous2otn9hu" target="_blank" rel="noopener noreferrer" class="link-btn">Accede a la actividad <i class="fas fa-check"></i></a>
+                    </div>
+-->
+                    <!-- Actividad 3
+                    <div class="link-card">
+                        <div class="link-number"> 3 </div>
+                        <h3 class="link-title">Actividad 3 - ¿Qué es la ética? </h3>
+                        <p class="link-desc">Lluvia de Ideas: ¿Qué es la ética?  </p>
+                        <a href="https://www.menti.com/alffz19gm13z" target="_blank" rel="noopener noreferrer" class="link-btn">Accede la lluvia de ideas <i class="fas fa-cloud"></i></a>
+                    </div>
+ -->
+                    <!-- Actividad 4 
+                    <div class="link-card">
+                        <div class="link-number"> 4 </div>
+                        <h3 class="link-title">Actividad 4 - ¿Cómo minimizar el riesgo? </h3>
+                        <p class="link-desc">Lluvia de Ideas: ¿Cómo minimizar el riesgo?  </p>
+                        <a href="https://www.menti.com/ald95zjbu7oe" target="_blank" rel="noopener noreferrer" class="link-btn">Accede la lluvia de ideas <i class="fas fa-cloud"></i></a>
+                    </div>
+-->
+                     <!-- Actividad 5
+                    <div class="link-card">
+                        <div class="link-number"> 5 </div>
+                        <h3 class="link-title">Actividad 5 - ¿Qué es el Consentimiento Informado o Asentimiento Informado? </h3>
+                        <p class="link-desc">Lluvia de Ideas: ¿Qué es el Consentimiento Informado o Asentimiento Informado?  </p>
+                        <a href="https://www.menti.com/al6w4pne9hkq" target="_blank" rel="noopener noreferrer" class="link-btn">Accede la lluvia de ideas <i class="fas fa-cloud"></i></a>
+                    </div>
+ -->
+                     <!-- Actividad 5 
+                    <div class="link-card">
+                        <div class="link-number"> 6 </div>
+                        <h3 class="link-title">Actividad 6 - ¿Qué debe de incluir el Consentimiento Informado? </h3>
+                        <p class="link-desc">Lluvia de Ideas: ¿Qué debe de incluir el Consentimiento Informado? </p>
+                        <a href="https://www.menti.com/almj1zetb7dz" target="_blank" rel="noopener noreferrer" class="link-btn">Accede la lluvia de ideas <i class="fas fa-cloud"></i></a>
+                    </div>
+-->
+                    <!-- Actividad 5.1  
+                    <div class="link-card">
+                    <div class="link-number">7.1 </div>
+                    <div class="link-title">Actividad 7: Aprendiendo a dictaminar - Parte 1 </div>
+                    <div class="link-desc">
+                        <p> <strong>Revisión de ICF y protocolo clínico.</strong></p>
+                        <p> Durante esta actividad, los alumnos trabajarán con un protocolo de investigación y un Formato de Consentimiento Informado (ICF), los cuales serán proporcionados por el facilitador/a. </p>
+                        <br>
+                        <p>Primero, en pequeños grupos, analizarán los documentos con base en una guía de preguntas orientadoras que aborden aspectos clave como:</p>
+                                      
+                    <li>1. Claridad y transparencia de la información al participante</li>
+                    <li>2. Riesgos y beneficios</li>
+                    <li>3. Medidas de confidencialidad</li>
+                    <li>4. Criterios de inclusión y exclusión</li>
+                    <li>5. Justificación del estudio </li>
+                    <li>6. Procedimientos éticos para el manejo de eventos adversos.</li>
+                    <br>
+                </div>
+
+                    <button class="link-btn" onclick="toggleDropdown('actividad5')">
+                        Enlace al Material para la actividad 
+                        <i class="fas fa-link"></i>
+                    </button>
+
+                    <div class="dropdown-content" id="actividad5">
+                        <a href="https://1drv.ms/f/c/e7d0dde89d5474ab/EqevstNOqd5Nt9qV_O1ezMQBSMRbfkiUchHbcD8g6ocAkw?e=PiNhcE" class="sub-link" target="_blank" rel="noopener noreferrer">Material - Equipo 1</a>
+                        <a href="https://1drv.ms/f/c/e7d0dde89d5474ab/EoSSVTf2LZROh346-775bc8B8sQLRd3mMsA-S5sk1nslzw?e=tYGDbT" class="sub-link" target="_blank" rel="noopener noreferrer">Material - Equipo 2</a>
+                       
+                                                
+                </div>             
+                </div>
+-->
+                
+                <!-- Actividad 5.2  Hacer Disponible hasta después de la sesión  
+                    <div class="link-card">
+                    <div class="link-number">7.2 </div>
+                    <div class="link-title">Actividad 7: Aprendiendo a dictaminar - Parte 2 </div>
+                    <div class="link-desc">
+                        <p> <strong>Generación de dictamen.</strong></p>
+                        <p> Posteriormente, cada grupo emitirá un dictamen para el Investigador Principal sobre los aspectos éticos del consentimiento y el protocolo, y sintetizará los hallazgos del grupo y propondrá al menos una mejora en el ICF o protocolo desde una perspectiva ética. </p>
+                        <br>
+                        <p>El entregable de esta actividad será un documento tipo oficio donde deberán describir sus observaciones consensadas del material revisado (aspectos éticos) y su veredicto: </p>
+                        <br>             
+                    <li><strong>Aprobado:</strong> si cumple con los aspectos éticos. </li>
+                    <li><strong>Pendiente de aprobación:</strong> si se requieren correcciones mayores y menores de aspectos éticos de los documentos, y aclaración de dudas. </li>
+                    <li><strong>Rechazado:</strong> no cumple con los aspectos éticos y se requiere un replanteamiento ético y/o metodológico ya que se compromete la integridad del participante. </li>
+                    <br>
+                    <p> El oficio se deberá subir en el siguiente enlace o bien se podrá compartir vía WhatsApp con tu facilitador del módulo.  </p>
+                        <br>
+                        <p>El facilitador revisará los oficios y proporcionará retroalimentación. </p>
+                        <br>
+                        <p><strong>Fecha máxima de entrega:</strong> Domingo 21 de septiembre a las 23:59.  </p>
+                        <br>
+
+
+                </div>
+
+                    <button class="link-btn" onclick="toggleDropdown('actividad6')">
+                        Sube tu oficio
+                        <i class="fas fa-upload"></i>
+                    </button>
+
+                    <div class="dropdown-content" id="actividad6">
+                        <a href="https://1drv.ms/f/c/e7d0dde89d5474ab/EpQU2BYCBKFBhlwe7_5VZxsBwdPKUvxgolYF_E8DdVttMQ?e=WPVctW" class="sub-link" target="_blank" rel="noopener noreferrer">Dictamen - Equipo 1</a>
+                        <a href="https://1drv.ms/f/c/e7d0dde89d5474ab/Eq8ewOGqehVKrVsvt117zvkB4aGWMwgpffNNPq0uOWhuuQ?e=WbwNBb" class="sub-link" target="_blank" rel="noopener noreferrer">Dictamen - Equipo 2</a>
+                       
+                                                
+                </div>             
+                </div>    
+ -->               
+                 <!-- Material de Soporte
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title">Material de Soporte</h3>
+                        <p class="link-desc">En el siguiente enlace encontrarás el material de soporte de este módulo, la contraseña para acceder al material la encontrarás en el correo que se envió al concluir la sesión.</p>
+                        <a href="https://1drv.ms/f/c/e7d0dde89d5474ab/EvsjdY6taQFCpapQcKkgpy4BcsFePBSPUSnol8mNEkjadQ?e=ydsOuA" target="_blank" rel="noopener noreferrer" class="link-btn">Accede al material de soporte <i class="fas fa-folder"></i></a>
+                    </div>
+-->
+                    <!-- Material de Soporte
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title">Cursos, seminarios y capacitaciones</h3>
+                        <p class="link-desc">En los siguientes enlaces tendrás acceso diferentes cursos, seminarios y capacitaciones.</p>
+                        
+                    </div>
+-->
+                    <!-- Material de Soporte
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title">Curso autodirigido - Universidad Autónoma de Queretaro y la Comisión Nacional de Bioética (CONBIOÉTICA) </h3>
+                        <p class="link-desc">Es curso está dirigido a miembros de Comités de Ética en Investigación (CEI), así como a investigadores, médicos, docentes, enfermeras, psicólogos, farmacólogos, abogados, antropólogos y otros profesionales.
+Al concluir y aprobar los cursos, se presenta la opción de obtener una constancia, esta constancia tiene un costo de $500. 
+</p>
+                        <a href="http://unidadbioetica.com/capacitacion-etica-investigacion/ " target="_blank" rel="noopener noreferrer" class="link-btn">Acceder al curso <i class="fas fa-book-open"></i></a>
+                    </div>
+-->
+                    <!-- Material de Soporte
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title">Global Health Training Centre - Cursos de Investigación Clínica </h3>
+                        <p class="link-desc">La Doctora Laura Zárraga, comparté la siguiente página; es una de sus favoritas para la capacitación en investigación clínica, incluyendo aspectos éticos, esta página cuenta con cursos en inglés y en español. Al concluir los cursos y aprobar las evaluaciones se pueden obtener constancias. La Doctora Laura recomienda seguir la siguiente línea de formación:</p>
+                        <a href="https://globalhealthtrainingcentre.tghn.org/formacion-en-linea-de-etica-de-investigacion/ " target="_blank" rel="noopener noreferrer" class="link-btn">Acceder la linea de formación <i class="fas fa-book-open"></i></a>
+                    </div>
+-->
+                    <!--  Material de Soporte
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title">IMSS Bienestar - Cursos de Investigación Clínica y Ética en Investigación </h3>
+                        <p class="link-desc">El IMSS Bienestar tiene una plataforma de capacitación donde incluye cursos de investigación y ética en investigación, son gratuitos y se pueden obtener constancias de cumplimiento. El único requisito para tener acceso es completar el registro en la plataforma. </p>
+                        <a href="https://educacion.imssbienestar.gob.mx/siesabi-aulavirtual/course/index.php?categoryid=31" target="_blank" rel="noopener noreferrer" class="link-btn">Acceder la plataforma <i class="fas fa-book-open"></i></a>
+                    </div>
+-->
+                    <!--  Material de Soporte
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title">Programa Universitario de Bioética de la UNAM </h3>
+                        <p class="link-desc">En el siguiente enlace encontrarán cursos autogestivos del Programa Universitario de Bioética de la UNAM, estos cursos también son gratuitos y se pueden obtener constancias de cumplimiento.</p>
+                        <a href="https://www.bioetica.unam.mx/cursos-autogestivos/" target="_blank" rel="noopener noreferrer" class="link-btn">Acceder a los cursos <i class="fas fa-book-open"></i></a>
+                    </div>
+-->
+                    <!--  Material de Soporte
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title">Programa Universitario de Bioética de la UNAM - Canal de YouTube</h3>
+                        <p class="link-desc">En el siguiente enlace encontrarán el canal de YouTube del Programa Universitario de Bioética de la UNAM.</p>
+                        <a href="https://www.youtube.com/@programauniversitariodebio293 " target="_blank" rel="noopener noreferrer" class="link-btn">Acceder al canal de YouTube <i class="fas fa-tv" ></i></a>
+                    </div>
+-->
+                    <!--  Material de Soporte
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title">Curso de la OPS sobre Ética en Salud Pública</h3>
+                        <p class="link-desc">Curso en línea ofrecido por la Organización Panamericana de la Salud.</p>
+                        <a href="https://campus.paho.org/es/curso/etica-salud-publica" target="_blank" rel="noopener noreferrer" class="link-btn">Acceder al curso <i class="fas fa-book-open" ></i></a>
+                    </div>
+-->
+                    <!--  Material de Soporte
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title">Programa Regional de Bioética de la OPS</h3>
+                        <p class="link-desc">Plataforma con cursos y material especializado en bioética. Pueden inscribirse a los newsletters y recibir invitaciones a conferencias.</p>
+                        <a href="https://www.paho.org/es/bioetica" target="_blank" rel="noopener noreferrer" class="link-btn">Accede a la plataforma <i class="fas fa-book-open" ></i></a>
+                    </div>
+-->
+                    <!--  Material de Soporte
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title">Seminarios virtuales pasados de la OPS</h3>
+                        <p class="link-desc">Grabaciones de conferencias anteriores organizadas por el Programa Regional de Bioética.</p>
+                        <a href="https://www.paho.org/es/bioetica/seminarios-virtuales-bioetica" target="_blank" rel="noopener noreferrer" class="link-btn">Accede a los seminarios <i class="fas fa-users" ></i></a>
+                    </div>
+-->
+                    <!--  Material de Soporte
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title">Canal de YouTube de la CONBIOÉTICA</h3>
+                        <p class="link-desc">Transmite seminarios en vivo. Al concluir el cuestionario correspondiente, emiten constancia de participación.</p>
+                        <a href="https://www.youtube.com/@conbioeticaMX" target="_blank" rel="noopener noreferrer" class="link-btn">Acceder al canal de YouTube  <i class="fas fa-tv" ></i></a>
+                    </div>
+-->
+                    <!--  Material de Soporte
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title">Repositorio de la OPS (IRIS)</h3>
+                        <p class="link-desc">Aquí encontrarán material académico y publicaciones de la OPS.</p>
+                        <a href="https://iris.paho.org/#indexes" target="_blank" rel="noopener noreferrer" class="link-btn">Acceder al repositorio  <i class="fas fa-folder" ></i></a>
+                    </div>
+ -->                         
+                    <!--  Material de Soporte
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title">Facebook de la Comisión Estatal de Bioética e Investigación de Jalisco</h3>
+                        <p class="link-desc">Comparte seminarios y organiza anualmente un curso de actualización en línea.</p>
+                        <a href="https://www.facebook.com/people/Comisi%C3%B3n-Estatal-de-Bio%C3%A9tica-e-Investigaci%C3%B3n-Jalisco/100070058240822/" target="_blank" rel="noopener noreferrer" class="link-btn">Acceder a la página de Facebook  <i class="fas fa-facebook" ></i></a>
+                    </div>
+-->
+                    <!--  Material de Soporte
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title">Facebook del Comité de Ética de la Facultad de Medicina de la UAEMex</h3>
+                        <p class="link-desc">Espacio donde difunden sus actividades académicas y de formación en ética.</p>
+                        <a href="https://www.facebook.com/CEI.FACMED.UAEMEX" target="_blank" rel="noopener noreferrer" class="link-btn">Acceder a la página de Facebook  <i class="fas fa-facebook" ></i></a>
+                    </div>
+-->
+                    <!--  Eventos próximos 
+<div class="link-card">
+    <div class="link-number"></div>
+    <h3 class="link-title">IV Seminario de Educación Continua en Bioética – CISAV</h3>
+    <p class="link-desc">
+        Seminario online gratuito. <strong>22 de septiembre – 15 de diciembre de 2025</strong><br>
+        Lunes 10:00–12:00 hrs (Hora CDMX) • Modalidad: Zoom • Constancia con 80% de asistencia (puedes faltar a una sesión como máximo). 
+        La verificación de asistencia se hace mediante el formulario que se compartirá en el chat de Zoom durante cada sesión.
+    </p>
+    <p class="link-desc"><strong>Programa (resumen):</strong><br>
+        22 sep – Bioética y Derechos Humanos en las residencias médicas<br>
+        27 oct – Intrusismo profesional y Bioética<br>
+        24 nov – En Medicina: ¿Enseñar, educar o formar en valores?<br>
+        15 dic – Cuerpos colegiados en Bioética: 30 años de la ANMB
+    </p>
+    <a href="https://f.mtr.cool/cdqikuhenn" target="_blank" rel="noopener noreferrer" class="link-btn">Inscribirme al seminario (sin costo) <i class="fas fa-calendar-plus"></i></a>
+</div>
+
+<div class="link-card">
+    <div class="link-number"></div>
+    <h3 class="link-title">VI Curso Interdisciplinario de Bioética – CEI Jalisco</h3>
+    <p class="link-desc">
+        Curso online gratuito. <strong>3 de octubre – 5 de diciembre de 2025</strong><br>
+        Sesiones: viernes 8:00–9:00 am (Hora CDMX) • Transmisión por Facebook Live • Constancia: 80% de asistencia + ensayo final.
+    </p>
+    <a href="https://forms.gle/sRvMbbtHu4yPS8WQA" target="_blank" rel="noopener noreferrer" class="link-btn">Registro (sin costo) <i class="fas fa-clipboard-list"></i></a>
+    <br>  
+    <a href="https://www.facebook.com/profile.php?id=100070058240822" target="_blank" rel="noopener noreferrer" class="link-btn" style="margin-left:8px;">Ver transmisión en FB Live <i class="fab fa-facebook"></i></a>
+</div>
+</div>
+                   
+                </div>
+            </section>
+ -->           
+            <!-- Navegación entre módulos -->
+            <div class="module-nav">
+                <a href="mod-2.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Módulo Anterior</a>
+                <a href="mod-4.html" class="nav-btn">Siguiente Módulo <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer idéntico al de la landing page -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Sioltalife Educación Continua</h3>
+                    <p>Impulsando tu carrera con formación de calidad en investigación clínica y crecimiento profesional.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/sioltalife"  class="sub-link" target="_blank" rel="noopener noreferrer" ><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.tiktok.com/@sioltalife?_t=ZS-8xS1CZBnKcy&_r=1" class="sub-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.youtube.com/@SioltalifeEducaci%C3%B3nContinua"  class="sub-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.linkedin.com/company/s%C3%ADoltalife/"  class="sub-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+                        <li><a href="index.html#modules"><i class="fas fa-chevron-right"></i> Módulos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Recursos</h3>
+                    <ul>
+                        <li><a href="calendar.html"><i class="fas fa-chevron-right"></i> Calendario de Sesiones</a></li>
+                        <li><a href="glossary.html"><i class="fas fa-chevron-right"></i> Glosario </a></li>
+                        <li><a href="support.html#foro"><i class="fas fa-chevron-right"></i> Foro de Discusión</a></li>
+                        <li><a href="support.html#faqs"><i class="fas fa-chevron-right"></i> Preguntas Frecuentes</a></li>
+                        <li><a href="support.html#experts"><i class="fas fa-chevron-right"></i> Centro de Ayuda</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><a href="mailto:ventas@sioltalife.com"><i class="fas fa-envelope"></i> ventas@sioltalife.com</a></li>
+                        <li><a href="http://wa.link/kcfonq" target="_blank" rel="noopener noreferrer"><i class="fas fa-phone"></i> +52 (729) 184-8814</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Sioltalife. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+<script>
+  function toggleDropdown(id) {
+    const section = document.getElementById(id);
+    const isVisible = section.style.display === 'flex';
+    section.style.display = isVisible ? 'none' : 'flex';
+  }
+</script>
+
+
+
+</body>
+</html>

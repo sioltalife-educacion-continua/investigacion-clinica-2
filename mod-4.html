@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 4 | Regulación en Estudios Clínicos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets//favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets//favicon-16x16.png">
+    <link rel="manifest" href="assets//site.webmanifest">
+    <style>
+        :root {
+            --primary: #2D71B8;
+            --secondary: #1a4d8c;
+            --accent: #3F8FD2;
+            --light: #F0F7FF;
+            --dark: #1f1f1f;
+            --text: #333;
+            --gray: #6c757d;
+            --white: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8fcff 0%, #e6f2ff 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* HEADER - IDÉNTICO AL LANDING PAGE */
+        .main-header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0 20px;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Contenido principal */
+        .main-content {
+            flex: 1;
+            padding: 20px 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .module-hero {
+            text-align: center;
+            padding: 40px 20px;
+            margin: 0 auto 40px;
+            max-width: 1200px;
+        }
+        
+        .module-page-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .module-page-subtitle {
+            text-align: center;
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .module-description {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 1px solid rgba(45, 113, 184, 0.1);
+        }
+        
+        /* Linktree Grid */
+        .linktree-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(1000px, 1fr));
+            gap: 50px;
+            margin-bottom: 100px;
+        }
+        
+        .link-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(45, 113, 184, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary);
+        }
+        
+        .link-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 50%;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .link-title {
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .link-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            flex-grow: 1;
+            line-height: 1.7;
+        }
+        
+        .link-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 14px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            border: 2px solid transparent;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .link-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(45, 113, 184, 0.3);
+        }
+        
+        .link-btn i {
+            margin-left: 8px;
+            font-size: 0.9em;
+        }
+        
+        /* Module Navigation */
+        .module-nav {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 0;
+        }
+        
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        
+        .nav-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(45, 113, 184, 0.3);
+        }
+        
+        .nav-btn i {
+            margin-right: 8px;
+        }
+
+        
+/* A revisar   */
+        .dropdown-content {
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .sub-link {
+            background-color: #fff;
+            border: 1px solid #2D71B8;
+            border-radius: 6px;
+            padding: 0.75rem;
+            color: #2D71B8;
+            font-weight: 500;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .sub-link:hover {
+            background-color: #2D71B8;
+            color: white;
+        }  
+
+/* Tarjetas con Dropdownlist  */
+       .dropdown-content {
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.sub-link {
+  background-color: var(--white);
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.sub-link:hover {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+ /* FOOTER DE ANCHO COMPLETO */
+        .full-width-footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: auto;
+            width: 100%;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }      
+
+        
+        /* FOOTER - IDÉNTICO AL LANDING PAGE */
+        .main-footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
+            color: white;
+            padding: 60px 0 30px;
+            border-radius: var(--radius) var(--radius) 0 0;
+            margin-top: auto;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+                padding: 15px 0;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .module-page-title {
+                font-size: 2rem;
+            }
+            
+            .logo-img {
+                height: 40px;
+            }
+            
+            .module-nav {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            .linktree-grid {
+                gap: 20px;
+            }
+            
+            .footer-grid {
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header idéntico al de la landing page -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="#">
+                    <img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_300,w_300,f_auto,q_auto/1187729/437761_723752.png" 
+                         alt="Logo Academia Digital" 
+                         class="logo-img">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="index.html#modules"><i class="fas fa-book"></i> Módulos</a></li>
+                    <li><a href="calendar.html"><i class="fas fa-calendar"></i> Calendario</a></li>
+                    <li><a href="support.html"><i class="fas fa-question-circle"></i> Soporte</a></li>
+                    <li><a href="glossary.html"><i class="fas fa-book-open"></i> Glosario</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="module-hero">
+                <h1 class="module-page-title">Módulo 4: Regulación en Estudios Clínicos</h1>
+                <p class="module-page-subtitle">Material de consulta y recursos para el módulo</p>
+                
+                <div class="module-description" style="text-align: justify; line-height: 1.6;">
+                    
+                   <p>
+        Este cuarto bloque ofrece una <strong>visión global y comparativa</strong> del entorno normativo que sustenta la investigación clínica. En él, exploraremos el <strong>marco regulatorio</strong> en diferentes <strong>regiones del mundo</strong>, analizando las normativas vigentes en <strong>México, Estados Unidos y la Unión Europea</strong>.
+    </p>
+    
+    <p><br>
+        El objetivo es comprender cómo las <strong>diferencias regulatorias</strong> impactan directamente en el <strong>diseño, la ejecución y la aprobación</strong> de los estudios clínicos. Analizaremos las <strong>ventajas y desventajas</strong> de cada sistema, permitiéndote identificar los alcances y limitaciones de las diversas jurisdicciones sanitarias.
+    </p><br>
+
+    <p>
+        Asimismo, revisaremos el papel de los <strong>organismos internacionales</strong> responsables de <strong>armonizar lineamientos</strong> y guías globales para favorecer la conducción ética y científica de los ensayos clínicos a nivel global.
+    </p>
+
+    <div style="margin-top: 30px; padding: 20px 40px; background-color: #fcfcfc; border-radius: 10px; border: 1px solid #e1e8ed;">
+        <h3 style="margin-top: 0; color: #2c3e50; text-align: left;">¿Qué aprenderás en este bloque?</h3>
+        
+        <ul style="list-style-type: none; padding-left: 0;">
+            <li style="margin-bottom: 15px; display: flex; align-items: baseline;">
+                <span style="color: #3498db; font-size: 1.2em; margin-right: 10px;">•</span>
+                <span><strong>Marcos Regulatorios Regionales:</strong> Estudiarás la normativa aplicada en <strong>México (COFEPRIS)</strong>, <strong>Estados Unidos (FDA)</strong> y la <strong>Unión Europea (EMA)</strong>.</span>
+            </li>
+            <li style="margin-bottom: 15px; display: flex; align-items: baseline;">
+                <span style="color: #3498db; font-size: 1.2em; margin-right: 10px;">•</span>
+                <span><strong>Análisis Comparativo:</strong> Identificarás las <strong>ventajas y desventajas</strong> competitivas entre los sistemas regulatorios nacionales e internacionales.</span>
+            </li>
+            <li style="margin-bottom: 15px; display: flex; align-items: baseline;">
+                <span style="color: #3498db; font-size: 1.2em; margin-right: 10px;">•</span>
+                <span><strong>Armonización Global:</strong> Comprenderás la función de los <strong>organismos internacionales</strong> en la creación de guías estandarizadas.</span>
+            </li>
+            <li style="margin-bottom: 15px; display: flex; align-items: baseline;">
+                <span style="color: #3498db; font-size: 1.2em; margin-right: 10px;">•</span>
+                <span><strong>Autoridades y Documentación:</strong> Aprenderás a reconocer las <strong>funciones de las autoridades</strong> y los documentos críticos requeridos en cada jurisdicción.</span>
+            </li>
+            <li style="margin-bottom: 0; display: flex; align-items: baseline;">
+                <span style="color: #3498db; font-size: 1.2em; margin-right: 10px;">•</span>
+                <span><strong>Impacto Operativo:</strong> Analizarás cómo los criterios regulatorios influyen en los tiempos y procesos de <strong>aprobación de estudios</strong>.</span>
+            </li>
+        </ul>
+    </div>
+</div>
+
+                </div>
+            </section>
+            
+            <section class="linktree-section">
+                <div class="linktree-grid">
+                   
+                    <!-- Actividad Disclaimer -->
+                    <div class="link-card">
+                        <div class="link-number"> </div>
+                        <h3 class="link-title">Actividades del Módulo y Material de Soporte</h3>
+                        <p class="link-desc">Las actividades del Módulo, el Material de Soporte y las actividades para después de la sesión se encontrarán disponibles un par de horas antes de arrancar la sesión. </p>
+                        
+                    </div>                 
+                    
+                    
+                    <!-- Actividad 1 
+                    <div class="link-card">
+                        <div class="link-number">1</div>
+                        <h3 class="link-title">Actividad 1 - Lluvia de Ideas - Rompehielos </h3>
+                        <p class="link-desc">¿Con qué animal te identificas?</p>
+                        <a href="https://www.menti.com/alkedftocvwx" target="_blank" rel="noopener noreferrer" class="link-btn">Accede a la lluvia de ideas <i class="fas fa-cloud"></i></a>
+                    </div>
+                  -->  
+                    <!-- Actividad 2 
+                    <div class="link-card">
+                        <div class="link-number">2</div>
+                        <h3 class="link-title">Actividad 2 - La importancia de regular</h3>
+                        <p class="link-desc">Interactúa y escribe una palabra que ejemplifique la importancia de regular.</p>
+                        <a href="https://www.menti.com/alwj6oqt2zvs" target="_blank" rel="noopener noreferrer" class="link-btn">Accede a la lluvia de ideas <i class="fas fa-cloud"></i></a>
+                    </div>
+                  -->  
+                    <!-- Actividad 3 
+                    <div class="link-card">
+                        <div class="link-number">3</div>
+                        <h3 class="link-title">Actividad 3 - Participantes en la regulación de la Investigación Clínica </h3>
+                        <p class="link-desc">Interactúa y responde la siguiente pregunta: ¿Quiénes participan en la regulación en investigación clínica?</p>
+                        <a href="https://www.menti.com/alzaswhcwf4n" target="_blank" rel="noopener noreferrer" class="link-btn">Accede a la lluvia de ideas <i class="fas fa-cloud"></i></a>
+                    </div>
+                    
+                  -->                   
+                    
+                   <!-- Actividad Después de sesión
+                    <div class="link-card">
+                    <div class="link-number"></div>
+                    <div class="link-title">Tarea Módulo 4 - Del papel a la práctica: análisis de los compromisos regulatorios en investigación clínica </div>
+                    <div class="link-desc">
+                        <p> <strong>Objetivo de la actividad</strong></p>
+                        <p> Que los estudiantes analicen los compromisos regulatorios relacionados con la digitalización en investigación clínica en México, identificando tanto los avances como las áreas pendientes a partir de fuentes oficiales. </p>
+                        <br>
+                        <p> <strong>Instrucciones</strong></p>
+                        <p> <strong>1. Revisión documental</strong>
+                            <li>Lean el documento “Estrategia de Certidumbre Regulatoria para el sector farmacéutico”.</li>
+                            <li>Diríjanse a la sección VI. Medidas en proceso de implementación, inciso d) Digitalización como vía para la optimización, apartado Investigación clínica (página 10).</li>
+                            <li> Identifiquen y enumeren los compromisos descritos en esa sección..</li>
+                            <br>
+                            <p> <strong>2.	Análisis de implementación</strong>
+                            <li> Visiten la página oficial de Cofepris.</li>
+                            <li> Investiguen si los compromisos identificados ya se han implementado y, en su caso, describan el nivel de avance actual.</li>
+                            <li> Comparen la información oficial con lo planteado en el documento.</li>
+                            <br>
+                            <p> <strong>Producto esperado</strong>
+                             <p> Un informe breve (1–1.5 cuartillas) en PDF que incluya:  
+                            <li> Listado de los compromisos identificados.</li>
+                            <li> Análisis del nivel de implementación según Cofepris.</li>
+                            <li> Una reflexión crítica sobre las implicaciones para la investigación clínica en México.</li>
+                            <br>
+                            <br>
+                            <p> <strong>Indicaciones de entrega</strong>
+                            <li> Extensión: 1–1.5 cuartillas, letra Times New Roman 12, interlineado 1.5.</li>
+                            <li> Formato: PDF.</li>
+                            <li> Enviar por correo el informe a jchiquete@sioltalife.com</li>
+                            <br>
+
+                      <a href="https://1drv.ms/f/c/e7d0dde89d5474ab/EmRKwzFme1pDhx0lqVem0TABRQT7raLRxD91Cwc7XcpqCw?e=TDLJFW" target="_blank" rel="noopener noreferrer" class="link-btn">Accede la rúbrica de la actividad y al material de consulta <i class="fas fa-file"></i></a> 
+                </div>                                
+                </div>
+                 -->
+                <!-- Material de Soporte 
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title">Material de Soporte </h3>
+                        <p class="link-desc">En esta sección encontrarás recursos clave para comprender la regulación de los estudios clínicos en México. Se incluyen documentos normativos, listados oficiales de comités y unidades autorizadas, así como fuentes institucionales y medios especializados que te ayudarán a mantenerte actualizado.</p>                        
+                    </div>
+-->
+                    <!-- Material de Soporte 
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title"> Documentos, Leyes, Reglamentos, Normas y Guías referenciados durante el módulo.</h3>
+                        <p class="link-desc">Accede a un resumen y descripción de Documentos, Leyes, Reglamentos, Normas y Guías referenciados durante el módulo.</p>
+                        <a href="https://1drv.ms/b/c/e7d0dde89d5474ab/ETS0f4kIVLlEscGvQO0KcLMB04t9IHcwstSCdX33BqBF0g?e=TGXG86" target="_blank" rel="noopener noreferrer" class="link-btn">Accede al documento <i class="fas fa-file"></i></a>
+                    </div>
+-->
+                    <!-- Material de Soporte 
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title">Listados oficiales y registros </h3>
+                        <p class="link-desc">Las siguientes secciones contienen contienen registros y ejemplos de listados actualizados de los principales actores en la regulación y ejecución de estudios clínicos en México, como comités de ética, comités de investigación y unidades autorizadas por la autoridad regulatoria.</p>                        
+                    </div>
+-->
+                    <!-- Material de Soporte 
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title"> Ejemplo de Listado de Miembros de un Comité de Ética en Investigación - CEI Hospital Universitario 2025</h3>
+                        <p class="link-desc">Directorio actualizado de los integrantes del Comité de Ética en Investigación del Hospital Universitario.</p>
+                        <a href="https://1drv.ms/b/c/e7d0dde89d5474ab/EcIX7V140zVBmK8ixZrRCzUByGaUJzl6p0XYtXpueDVAwA?e=LfEai4" target="_blank" rel="noopener noreferrer" class="link-btn">Accede al directorio <i class="fas fa-book-open"></i></a>
+                    </div>
+
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title"> Listado de Registros Emitidos – Comités de Ética (CONBIOÉTICA)</h3>
+                        <p class="link-desc">Relación oficial de comités de ética en investigación en México reconocidos por la Comisión Nacional de Bioética.</p>
+                        <a href="https://1drv.ms/b/c/e7d0dde89d5474ab/Edd3V7yMMA5IvkqSVku3inQBLGNQRs3UFjAySMK6cUXsqw?e=9muU4L" target="_blank" rel="noopener noreferrer" class="link-btn">Accede al registro <i class="fas fa-list"></i></a>
+                    </div>
+
+                     <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title"> Unidades de Intercambiabilidad y Biocomparabilidad – Terceros Autorizados</h3>
+                        <p class="link-desc">Directorio de unidades autorizadas por COFEPRIS para realizar estudios de intercambiabilidad y biocomparabilidad de medicamentos.</p>
+                        <a href="https://1drv.ms/b/c/e7d0dde89d5474ab/EbCcpdML7UhDt3MUE2s0th0B7Y_wbI9TZO2sWEzNIrt4Xg?e=pKGknB" target="_blank" rel="noopener noreferrer" class="link-btn">Accede al directorio <i class="fas fa-book-open"></i></a>
+                    </div>
+-->
+                    <!-- Material de Soporte
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title">Requisitos de sometimiento de protocolos </h3>
+                        <p class="link-desc">En las siguientes secciones encontrarás las guías y lineamientos que establecen los requisitos para el envío, revisión y aprobación de protocolos de investigación clínica ante diferentes comités y autoridades.</p>                        
+                    </div>
+ -->
+                    <!-- Material de Soporte 
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title"> Requisitos de Sometimiento – CIFE</h3>
+                        <p class="link-desc">Documentación y pasos necesarios para la presentación de protocolos ante el Comité de Investigación y Ética del Centro de Investigación Farmacéutica Especializada (CIFE).</p>
+                        <a href="https://1drv.ms/b/c/e7d0dde89d5474ab/EVmE-U-9RFJGk14y8LpdZoQBg8_towaWxgbvGLtwxYczzA?e=x8uqeD" target="_blank" rel="noopener noreferrer" class="link-btn">Accede al documento <i class="fas fa-file"></i></a>
+                    </div>
+-->
+                    <!-- Material de Soporte 
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title"> Requisitos de Sometimiento – Comité Panamerican</h3>
+                        <p class="link-desc">Lineamientos específicos para la evaluación y aprobación de protocolos en el Comité Panamerican.</p>
+                        <a href="https://1drv.ms/b/c/e7d0dde89d5474ab/Ef9UxCwoJKVBg75ZrejHKyIBbe6VcCsKjERyB3wcAgilAg?e=FLeOQh" target="_blank" rel="noopener noreferrer" class="link-btn">Accede al documento <i class="fas fa-file"></i></a>
+                    </div>
+-->
+                     <!-- Material de Soporte 
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title">Requisitos de sometimiento de protocolos </h3>
+                        <p class="link-desc">En la siguiente sección encontrarás enlaces a las páginas web de instituciones oficiales responsables de la regulación de medicamentos, investigación clínica y normatividad en México. Constituyen la base para la supervisión de estudios clínicos.</p>                        
+                    </div>
+-->
+                    <!-- Material de Soporte 
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title"> COFEPRIS</h3>
+                        <p class="link-desc">Comisión Federal para la Protección contra Riesgos Sanitarios, autoridad regulatoria en México en materia de medicamentos y estudios clínicos.</p>
+                        <a href="https://www.gob.mx/cofepris" target="_blank" rel="noopener noreferrer" class="link-btn">Accede al sitio web <i class="fas fa-institution"></i></a>
+                    </div>
+-->
+                    <!-- Material de Soporte 
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title"> Consejo de Salubridad General</h3>
+                        <p class="link-desc">Órgano colegiado que establece políticas y disposiciones de salubridad general en México, con impacto en la investigación clínica.</p>
+                        <a href="https://www.gob.mx/csg" target="_blank" rel="noopener noreferrer" class="link-btn">Accede al sitio web <i class="fas fa-institution"></i></a>
+                    </div>
+-->
+                    <!-- Material de Soporte 
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title">Fuentes institucionales y de actualidad </h3>
+                        <p class="link-desc">En la siguiente sección encontrarás enlaces a recursos de asociaciones, cámaras, medios especializados y periodistas que ofrecen información actualizada sobre la industria farmacéutica, la salud pública y las políticas regulatorias. Son útiles para mantener un panorama amplio y actualizado.</p>                        
+                    </div>
+-->
+                    <!-- Material de Soporte 
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title"> Asociación Mexicana de Laboratorios Farmacéuticos (AMELAF)</h3>
+                        <p class="link-desc">Organización que agrupa laboratorios farmacéuticos nacionales. Destaca el apartado de Comunicación – Carpeta Informativa, que recopila diariamente noticias relevantes en salud e industria farmacéutica.</p>
+                        <a href="https://amelaf.org.mx/" target="_blank" rel="noopener noreferrer" class="link-btn">Accede al sitio web <i class="fas fa-institution"></i></a>
+                    </div>
+-->
+                    <!-- Material de Soporte 
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title"> Cámara Nacional de la Industria Farmacéutica (CANIFARMA)</h3>
+                        <p class="link-desc">Principal organismo empresarial que representa a la industria farmacéutica en México, con información normativa y de mercado.</p>
+                        <a href="https://www.canifarma.org.mx/" target="_blank" rel="noopener noreferrer" class="link-btn">Accede al sitio web <i class="fas fa-institution"></i></a>
+                    </div>
+-->
+                    <!-- Material de Soporte 
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title"> Código F</h3>
+                        <p class="link-desc">Blog de la CANIFARMA donde se publican artículos sobre temas de salud, innovación y regulaciones en la industria farmacéutica.</p>
+                        <a href="https://codigof.mx/" target="_blank" rel="noopener noreferrer" class="link-btn">Accede al blog <i class="fas fa-blog"></i></a>
+                    </div>
+-->
+                    
+
+ <!-- Material de Soporte 
+                    <div class="link-card">
+                    <div class="link-number"></div>
+                    <h3 class="link-title">Rodrigo Pacheco – Imagen Empresarial</h3>
+                        <p class="link-desc">Periodista que cubre temas empresariales, incluyendo la industria farmacéutica. Sus programas pueden escucharse en vivo por Imagen Radio o en retransmisión vía Spotify.                        
+                            </p>
+                        <a href="https://www.imagenradio.com.mx/imagen-empresarial" target="_blank" rel="noopener noreferrer" class="link-btn">Escucha la transmisión en vivo - Imagen Radio <i class="fas fa-radio"></i></a>
+        <br>  
+                <a href="https://open.spotify.com/show/7IAtOWojLKoU3brmo1gq9P" target="_blank" rel="noopener noreferrer" class="link-btn" style="margin-left:8px;">Escucha las retransmisiones en Spotify <i class="fab fa-spotify"></i></a>
+                        </div>
+-->
+<!-- Material de Soporte 
+                    <div class="link-card">
+                        <div class="link-number"></div>
+                        <h3 class="link-title"> Maribel Ramírez Coronel</h3>
+                        <p class="link-desc">Periodista especializada en salud pública e industria de la salud. Comparte análisis y noticias relevantes en su perfil de LinkedIn.</p>
+                        <a href="https://linkedin.com/in/maribel-ramirez-coronel-89a56410" target="_blank" rel="noopener noreferrer" class="link-btn">Accede al perfil de LinkedIn <i class="fab fa-linkedin"></i></a>
+                                      
+                    </div>
+
+                    
+                </div>
+            </section>
+ -->           
+            <!-- Navegación entre módulos -->
+            <div class="module-nav">
+                <a href="mod-3.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Módulo Anterior</a>
+                <a href="mod-5.html" class="nav-btn">Siguiente Módulo <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer idéntico al de la landing page -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Sioltalife Educación Continua</h3>
+                    <p>Impulsando tu carrera con formación de calidad en investigación clínica y crecimiento profesional.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/sioltalife"  class="sub-link" target="_blank" rel="noopener noreferrer" ><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.tiktok.com/@sioltalife?_t=ZS-8xS1CZBnKcy&_r=1" class="sub-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.youtube.com/@SioltalifeEducaci%C3%B3nContinua"  class="sub-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.linkedin.com/company/s%C3%ADoltalife/"  class="sub-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+                        <li><a href="index.html#modules"><i class="fas fa-chevron-right"></i> Módulos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Recursos</h3>
+                    <ul>
+                        <li><a href="calendar.html"><i class="fas fa-chevron-right"></i> Calendario de Sesiones</a></li>
+                        <li><a href="glossary.html"><i class="fas fa-chevron-right"></i> Glosario </a></li>
+                        <li><a href="support.html#foro"><i class="fas fa-chevron-right"></i> Foro de Discusión</a></li>
+                        <li><a href="support.html#faqs"><i class="fas fa-chevron-right"></i> Preguntas Frecuentes</a></li>
+                        <li><a href="support.html#experts"><i class="fas fa-chevron-right"></i> Centro de Ayuda</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><a href="mailto:ventas@sioltalife.com"><i class="fas fa-envelope"></i> ventas@sioltalife.com</a></li>
+                        <li><a href="http://wa.link/kcfonq" target="_blank" rel="noopener noreferrer"><i class="fas fa-phone"></i> +52 (729) 184-8814</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Sioltalife. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+<script>
+  function toggleDropdown(id) {
+    const section = document.getElementById(id);
+    const isVisible = section.style.display === 'flex';
+    section.style.display = isVisible ? 'none' : 'flex';
+  }
+</script>
+
+
+
+</body>
+</html>

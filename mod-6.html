@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 6 | El campo laboral de la investigación clínica</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets//favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets//favicon-16x16.png">
+    <link rel="manifest" href="assets//site.webmanifest">
+    <style>
+        :root {
+            --primary: #2D71B8;
+            --secondary: #1a4d8c;
+            --accent: #3F8FD2;
+            --light: #F0F7FF;
+            --dark: #1f1f1f;
+            --text: #333;
+            --gray: #6c757d;
+            --white: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8fcff 0%, #e6f2ff 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* HEADER - IDÉNTICO AL LANDING PAGE */
+        .main-header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0 20px;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Contenido principal */
+        .main-content {
+            flex: 1;
+            padding: 20px 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .module-hero {
+            text-align: center;
+            padding: 40px 20px;
+            margin: 0 auto 40px;
+            max-width: 1200px;
+        }
+        
+        .module-page-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .module-page-subtitle {
+            text-align: center;
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .module-description {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 1px solid rgba(45, 113, 184, 0.1);
+        }
+        
+        /* Linktree Grid */
+        .linktree-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(1000px, 1fr));
+            gap: 50px;
+            margin-bottom: 100px;
+        }
+        
+        .link-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(45, 113, 184, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary);
+        }
+        
+        .link-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 50%;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .link-title {
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .link-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            flex-grow: 1;
+            line-height: 1.7;
+        }
+        
+        .link-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 14px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            border: 2px solid transparent;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .link-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(45, 113, 184, 0.3);
+        }
+        
+        .link-btn i {
+            margin-left: 8px;
+            font-size: 0.9em;
+        }
+        
+        /* Module Navigation */
+        .module-nav {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 0;
+        }
+        
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        
+        .nav-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(45, 113, 184, 0.3);
+        }
+        
+        .nav-btn i {
+            margin-right: 8px;
+        }
+
+        
+/* A revisar   */
+        .dropdown-content {
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .sub-link {
+            background-color: #fff;
+            border: 1px solid #2D71B8;
+            border-radius: 6px;
+            padding: 0.75rem;
+            color: #2D71B8;
+            font-weight: 500;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .sub-link:hover {
+            background-color: #2D71B8;
+            color: white;
+        }  
+
+/* Tarjetas con Dropdownlist  */
+       .dropdown-content {
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.sub-link {
+  background-color: var(--white);
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.sub-link:hover {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+ /* FOOTER DE ANCHO COMPLETO */
+        .full-width-footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: auto;
+            width: 100%;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }      
+
+        
+        /* FOOTER - IDÉNTICO AL LANDING PAGE */
+        .main-footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
+            color: white;
+            padding: 60px 0 30px;
+            border-radius: var(--radius) var(--radius) 0 0;
+            margin-top: auto;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+                padding: 15px 0;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .module-page-title {
+                font-size: 2rem;
+            }
+            
+            .logo-img {
+                height: 40px;
+            }
+            
+            .module-nav {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            .linktree-grid {
+                gap: 20px;
+            }
+            
+            .footer-grid {
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header idéntico al de la landing page -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="#">
+                    <img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_300,w_300,f_auto,q_auto/1187729/437761_723752.png" 
+                         alt="Logo Academia Digital" 
+                         class="logo-img">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="index.html#modules"><i class="fas fa-book"></i> Módulos</a></li>
+                    <li><a href="calendar.html"><i class="fas fa-calendar"></i> Calendario</a></li>
+                    <li><a href="support.html"><i class="fas fa-question-circle"></i> Soporte</a></li>
+                    <li><a href="glossary.html"><i class="fas fa-book-open"></i> Glosario</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="module-hero">
+                <h1 class="module-page-title">Módulo 6: El campo laboral de la investigación clínica.</h1>
+                <p class="module-page-subtitle">Material de consulta y recursos para el módulo</p>
+                
+                <div class="module-description" style="text-align: justify; line-height: 1.6;">
+                    
+             <p>
+        Este sexto y último bloque constituye el <strong>puente entre tu formación académica y el entorno profesional</strong>. En él, exploraremos el panorama laboral de la investigación clínica, analizando la estructura operativa de la industria y los <strong>puestos de entrada</strong> disponibles para quienes inician su carrera en este sector.
+    </p>
+    <br>
+    <p>
+        El objetivo es comprender la organización de los equipos dentro de los <strong>Patrocinadores y las Organizaciones de Investigación por Contrato (CROs)</strong>. Identificaremos los roles clave en el área de <strong>Operaciones Clínicas (ClinOps)</strong>, desglosando sus responsabilidades dentro de la cadena de valor y cómo se articulan para garantizar el éxito de un estudio.
+    </p>
+<br>
+    <p>
+        Asimismo, revisaremos las <strong>competencias y habilidades clave</strong> que demanda el mercado actual. Finalmente, analizaremos el <strong>panorama laboral en México</strong>, brindándote una visión realista y estratégica para integrar tus conocimientos al mercado de la industria farmacéutica.
+    </p>
+
+    <div style="margin-top: 30px; padding: 20px 40px; background-color: #fcfcfc; border-radius: 10px; border: 1px solid #e1e8ed;">
+        <h3 style="margin-top: 0; color: #2c3e50; text-align: left;">¿Qué aprenderás en este bloque?</h3>
+        <br>
+        <ul style="list-style-type: none; padding-left: 0;">
+            <li style="margin-bottom: 15px; display: flex; align-items: baseline;">
+                <span style="color: #3498db; font-size: 1.2em; margin-right: 10px;">•</span>
+                <span><strong>Estructura de la Industria:</strong> Comprenderás el modelo de operación entre <strong>Patrocinadores y CROs</strong>.</span>
+            </li>
+            <li style="margin-bottom: 15px; display: flex; align-items: baseline;">
+                <span style="color: #3498db; font-size: 1.2em; margin-right: 10px;">•</span>
+                <span><strong>Roles de Entrada:</strong> Identificarás los perfiles de inicio en el área de <strong>Operaciones Clínicas (ClinOps)</strong>.</span>
+            </li>
+            <li style="margin-bottom: 15px; display: flex; align-items: baseline;">
+                <span style="color: #3498db; font-size: 1.2em; margin-right: 10px;">•</span>
+                <span><strong>Perfil de Competencias:</strong> Analizarás las <strong>habilidades clave</strong> que buscan las empresas en candidatos sin experiencia previa.</span>
+            </li>
+            <li style="margin-bottom: 15px; display: flex; align-items: baseline;">
+                <span style="color: #3498db; font-size: 1.2em; margin-right: 10px;">•</span>
+                <span><strong>Cadena de Valor:</strong> Reconocerás la importancia de cada función en la conducción <strong>ética y estandarizada</strong> de los estudios.</span>
+            </li>
+            <li style="margin-bottom: 0; display: flex; align-items: baseline;">
+                <span style="color: #3498db; font-size: 1.2em; margin-right: 10px;">•</span>
+                <span><strong>Mercado en México:</strong> Evaluarás las herramientas para alinear tus <strong>expectativas profesionales</strong> con las necesidades de la industria.</span>
+            </li>
+        </ul>
+    </div>
+
+                </div>
+            </section>
+            
+            <section class="linktree-section">
+                <div class="linktree-grid">
+                
+                    <!-- Actividad Disclaimer -->
+                    <div class="link-card">
+                        <div class="link-number"> </div>
+                        <h3 class="link-title">Actividades del Módulo y Material de Soporte</h3>
+                        <p class="link-desc">Las actividades del Módulo, el Material de Soporte y las actividades para después de la sesión se encontrarán disponibles un par de horas antes de arrancar la sesión. </p>
+                        
+                    </div>                     
+                <!-- Actividad complementaria 
+                    <div class="link-card">
+                    <div class="link-number"></div>
+                    <div class="link-title">Actividad Complementaria</div>
+                    <div class="link-desc"><p>Identificación y Preparación para un Rol en Investigación Clínica </p>
+                        <br>
+                    <p><strong>Instrucciones:</strong></p>
+                    <br>
+                    <p><strong>1. Elección del rol</strong></p>
+                    <li>Piensa: ¿En qué rol me visualizo aplicando dentro de 6 meses?</li>
+                    <li>Revisa los documentos y registros proporcionados.</li>
+                    <li>Elige un puesto de los vistos en clase (ejemplo: CTA, IHCRA, Data Assistant, Start-Up Associate, CRC, Reg Affairs Assistant, Safety Associate, QA Assistant, roles emergentes), el que más se adecue a tu perfil, intereses y gustos.</li>
+                    <li>Reflexiona con frases tipo:</li>
+                    <p><i>“Me gusta el monitoreo pero no quiero viajar mucho” → IHCRA</i> </li></p>
+                    <p><i>“Me encanta viajar, conocer personas y trabajar en sitio” → CRA</i> </li></p>
+                    <p><i>“Me gustan los datos y la organización, pero no quiero interacción directa con pacientes” → Data Assistant</i> </li></p>
+                    <br>
+                    <p><strong>Recomendación:</strong>Revisa los blogs de <a href="https://careers.iconplc.com/posts" target="_blank">ICON</a> plc y otras fuentes confiables, tienen descripciones de puestos muy detalladas que te ayudarán a decidir.</p>
+                    <br>
+                    <p><strong>2.Guardar una vacante real</strong></p>
+                    <li>Busca y guarda una vacante actual que corresponda al rol que elegiste. Esta vacante se compartirá junto con tu introspección y aplicación.</li>
+                    <li>Responde las siguientes preguntas en relación con la vacante elegida:</li>
+                    <p>¿Por qué elegí este rol?</p>
+                    <p>¿Qué requisitos cumplo actualmente?</p>
+                    <p>¿Qué requisitos me hacen falta?</p>
+                    <p>¿Qué plan de acción puedo tomar para estar preparado en 3-6 meses?</p>
+                    <p><i>(Opcional pero recomendable)</i> ¿Qué valor agregado puedo aportar al rol con mis fortalezas personales o experiencia previa?</p>
+                    <p></p>
+                    <br>
+                    <p><strong>3.Prepara tu aplicación para ese puesto</strong></p>
+                    <li>CV: Adapta tu CV real para que responda específicamente a los requisitos de la vacante. Incluye logros relevantes, experiencias aplicables y palabras clave que coincidan con la descripción del puesto.</li>
+                    <li>LinkedIn: Actualiza tu perfil profesional para reflejar tu interés y preparación hacia ese puesto.</li>
+                    <br>
+                    <p><i>Side note sobre LinkedIn:</i></p>
+                    <br>
+                    <p><i>En Sioltalife sabemos del poder que tiene un perfil de LinkedIn y que se trata de un perfil público, por lo que no necesariamente debe adaptarse a la investigación clínica si este no es el interés del alumno. Sin embargo, se deberán considerar los aspectos básicos de optimización:</i></p>
+                    <li>Actualización de foto profesional y portada</li>
+                    <li>Completar todas las secciones del perfil (resumen, experiencias, educación, habilidades, etc.)</li>
+                    <li>Palabras clave relevantes para visibilidad y networking (de acuerdo a lo que TU estás buscando <i>-Ya sea dentro del campo de la investigación clínica o no-</i></li>
+                    <li>Mantener coherencia entre CV y LinkedIn (en cuanto a tu experiencia, habilidades, etc)</li>
+                        <br>                                      
+                    
+                    <p><strong>Enregables</strong></p>
+                    <p> Un documento con:</p>
+                    <li>Detalles de la vacante elegida (link, descripción o PDF)</li>
+                    <li>Respuestas a las preguntas de introspección</li>
+                    <li>Tu <strong>CV adaptado</strong> a la vacante elegida</li>
+                    <li>Tu <strong>perfil de LinkedIn actualizado</strong></li>
+                    <br>
+                     <p><strong>Modo de entrega</strong></p>
+                    <li>Enviar el documento de la vacante y tu CV a: cmayorquin@sioltalife.com</li>
+                    <li>Dejar un mensaje en el grupo de WhatsApp cuando tu perfil esté listo, para revisión y retroalimentación</li>
+<br>
+                </div>
+                <a href="https://1drv.ms/b/c/e7d0dde89d5474ab/ESiXCyLUbXRHtfbWIwAyw9EBCaOxsWGD3N8uYd9R5Nvcfw?e=RbDZAz" target="_blank" rel="noopener noreferrer" class="link-btn">Accede a la descrición de la actividad complementaria <i class="fas fa-pencil"></i></a>
+                    </div>
+-->
+                <!-- Material de Soporte 
+                    <div class="link-card">
+                        <div class="link-number"> </div>
+                        <h3 class="link-title">Material de Soporte - Directorio</h3>
+                        <p class="link-desc">En el siguiente enlace encontrarás un Directorio de CROs, Farmaceúticas y Sitios de Investigación con presencia en México. </p>
+                        <a href="https://1drv.ms/b/c/e7d0dde89d5474ab/EQbj8Z3oabdIrZ_rvjOtfE8BjvkUdc76e8mSWxwKdNfb2A?e=5KrCRX" target="_blank" rel="noopener noreferrer" class="link-btn">Accede al directorio <i class="fas fa-book-open"></i></a>
+                    </div>
+                     
+
+                
+</div>
+
+
+                    
+                </div>
+            </section>
+ -->           
+            <!-- Navegación entre módulos -->
+            <div class="module-nav">
+                <a href="mod-5.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Módulo Anterior</a>
+                <a href="index.html" class="nav-btn"> Inicio   <i class="fas fa-home"></i></a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer idéntico al de la landing page -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Sioltalife Educación Continua</h3>
+                    <p>Impulsando tu carrera con formación de calidad en investigación clínica y crecimiento profesional.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/sioltalife"  class="sub-link" target="_blank" rel="noopener noreferrer" ><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.tiktok.com/@sioltalife?_t=ZS-8xS1CZBnKcy&_r=1" class="sub-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.youtube.com/@SioltalifeEducaci%C3%B3nContinua"  class="sub-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.linkedin.com/company/s%C3%ADoltalife/"  class="sub-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+                        <li><a href="index.html#modules"><i class="fas fa-chevron-right"></i> Módulos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Recursos</h3>
+                    <ul>
+                        <li><a href="calendar.html"><i class="fas fa-chevron-right"></i> Calendario de Sesiones</a></li>
+                        <li><a href="glossary.html"><i class="fas fa-chevron-right"></i> Glosario </a></li>
+                        <li><a href="support.html#foro"><i class="fas fa-chevron-right"></i> Foro de Discusión</a></li>
+                        <li><a href="support.html#faqs"><i class="fas fa-chevron-right"></i> Preguntas Frecuentes</a></li>
+                        <li><a href="support.html#experts"><i class="fas fa-chevron-right"></i> Centro de Ayuda</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><a href="mailto:ventas@sioltalife.com"><i class="fas fa-envelope"></i> ventas@sioltalife.com</a></li>
+                        <li><a href="http://wa.link/kcfonq" target="_blank" rel="noopener noreferrer"><i class="fas fa-phone"></i> +52 (729) 184-8814</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Sioltalife. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+<script>
+  function toggleDropdown(id) {
+    const section = document.getElementById(id);
+    const isVisible = section.style.display === 'flex';
+    section.style.display = isVisible ? 'none' : 'flex';
+  }
+</script>
+                    
+                </div>             
+                </div>
+
+                
+
+                
+</div>
+                 
+              
+
+
+</body>
+</html>

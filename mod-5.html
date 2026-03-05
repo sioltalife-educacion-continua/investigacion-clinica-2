@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 5  | Buenas Prácticas Clínicas, Documentos Esenciales y Buenas Prácticas de Documentación.</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets//favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets//favicon-16x16.png">
+    <link rel="manifest" href="assets//site.webmanifest">
+    <style>
+        :root {
+            --primary: #2D71B8;
+            --secondary: #1a4d8c;
+            --accent: #3F8FD2;
+            --light: #F0F7FF;
+            --dark: #1f1f1f;
+            --text: #333;
+            --gray: #6c757d;
+            --white: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8fcff 0%, #e6f2ff 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* HEADER - IDÉNTICO AL LANDING PAGE */
+        .main-header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0 20px;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Contenido principal */
+        .main-content {
+            flex: 1;
+            padding: 20px 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .module-hero {
+            text-align: center;
+            padding: 40px 20px;
+            margin: 0 auto 40px;
+            max-width: 1200px;
+        }
+        
+        .module-page-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .module-page-subtitle {
+            text-align: center;
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .module-description {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            border: 1px solid rgba(45, 113, 184, 0.1);
+        }
+        
+        /* Linktree Grid */
+        .linktree-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(1000px, 1fr));
+            gap: 50px;
+            margin-bottom: 100px;
+        }
+        
+        .link-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(45, 113, 184, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .link-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary);
+        }
+        
+        .link-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            border-radius: 50%;
+            color: white;
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .link-title {
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .link-desc {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            flex-grow: 1;
+            line-height: 1.7;
+        }
+        
+        .link-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 14px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            border: 2px solid transparent;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .link-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(45, 113, 184, 0.3);
+        }
+        
+        .link-btn i {
+            margin-left: 8px;
+            font-size: 0.9em;
+        }
+        
+        /* Module Navigation */
+        .module-nav {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 0;
+        }
+        
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            background: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        
+        .nav-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(45, 113, 184, 0.3);
+        }
+        
+        .nav-btn i {
+            margin-right: 8px;
+        }
+
+        
+/* A revisar   */
+        .dropdown-content {
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .sub-link {
+            background-color: #fff;
+            border: 1px solid #2D71B8;
+            border-radius: 6px;
+            padding: 0.75rem;
+            color: #2D71B8;
+            font-weight: 500;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .sub-link:hover {
+            background-color: #2D71B8;
+            color: white;
+        }  
+
+/* Tarjetas con Dropdownlist  */
+       .dropdown-content {
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.sub-link {
+  background-color: var(--white);
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.sub-link:hover {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+ /* FOOTER DE ANCHO COMPLETO */
+        .full-width-footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: auto;
+            width: 100%;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }      
+
+        
+        /* FOOTER - IDÉNTICO AL LANDING PAGE */
+        .main-footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
+            color: white;
+            padding: 60px 0 30px;
+            border-radius: var(--radius) var(--radius) 0 0;
+            margin-top: auto;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+                padding: 15px 0;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .module-page-title {
+                font-size: 2rem;
+            }
+            
+            .logo-img {
+                height: 40px;
+            }
+            
+            .module-nav {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+            
+            .linktree-grid {
+                gap: 20px;
+            }
+            
+            .footer-grid {
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header idéntico al de la landing page -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="#">
+                    <img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_300,w_300,f_auto,q_auto/1187729/437761_723752.png" 
+                         alt="Logo Academia Digital" 
+                         class="logo-img">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="index.html#modules"><i class="fas fa-book"></i> Módulos</a></li>
+                    <li><a href="calendar.html"><i class="fas fa-calendar"></i> Calendario</a></li>
+                    <li><a href="support.html"><i class="fas fa-question-circle"></i> Soporte</a></li>
+                    <li><a href="glossary.html"><i class="fas fa-book-open"></i> Glosario</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="module-hero">
+                <h1 class="module-page-title">Módulo 5: Buenas Prácticas Clínicas, Documentos Esenciales y Buenas Prácticas de Documentación.</h1>
+                <p class="module-page-subtitle">Material de consulta y recursos para el módulo</p>
+                
+                <div class="module-description" style="text-align: justify; line-height: 1.6;">
+                    
+              <p>
+        Este quinto bloque representa el <strong>eje operativo y de calidad</strong> de la formación. En él, integraremos los pilares que aseguran una investigación clínica ética y regulada: las <strong>Buenas Prácticas Clínicas (BPC)</strong>, la gestión de <strong>Documentos Esenciales</strong> y las <strong>Buenas Prácticas de Documentación (BPD)</strong>.
+    </p>
+    <br>
+    <p>
+        A lo largo de dos sesiones de profundización, revisaremos los fundamentos y los <strong>13 principios de la guía ICH-GCP (R2)</strong>. Analizaremos el <strong>Protocolo Clínico</strong> como documento rector y exploraremos la <strong>Sección 8 de las BPC</strong> para dominar el manejo de los documentos que sustentan la validez de un ensayo desde su inicio hasta su cierre.
+    </p>
+<br>
+    <p>
+        Bajo un enfoque 100% práctico, abordaremos las <strong>Buenas Prácticas de Documentación</strong> mediante el estándar <strong>ALCOA++</strong>. A través de <strong>talleres de revisión e identificación de errores</strong>, desarrollarás las habilidades necesarias para garantizar la trazabilidad y confiabilidad en el registro de datos.
+    </p>
+<br>
+    <div style="margin-top: 30px; padding: 20px 40px; background-color: #fcfcfc; border-radius: 10px; border: 1px solid #e1e8ed;">
+        <h3 style="margin-top: 0; color: #2c3e50; text-align: left;">¿Qué aprenderás en este bloque?</h3>
+        
+        <ul style="list-style-type: none; padding-left: 0;">
+            <li style="margin-bottom: 15px; display: flex; align-items: baseline;">
+                <span style="color: #3498db; font-size: 1.2em; margin-right: 10px;">•</span>
+                <span><strong>Fundamentos de BPC:</strong> Dominarás los <strong>13 principios (R2)</strong> y su aplicación técnica en el centro de investigación.</span>
+            </li>
+            <li style="margin-bottom: 15px; display: flex; align-items: baseline;">
+                <span style="color: #3498db; font-size: 1.2em; margin-right: 10px;">•</span>
+                <span><strong>Gestión Documental:</strong> Aprenderás a integrar y validar los <strong>Documentos Esenciales</strong> (Sección 8) del expediente clínico.</span>
+            </li>
+            <li style="margin-bottom: 15px; display: flex; align-items: baseline;">
+                <span style="color: #3498db; font-size: 1.2em; margin-right: 10px;">•</span>
+                <span><strong>Principios ALCOA++:</strong> Aplicarás los estándares internacionales para asegurar la <strong>integridad y calidad de los datos</strong>.</span>
+            </li>
+            <li style="margin-bottom: 15px; display: flex; align-items: baseline;">
+                <span style="color: #3498db; font-size: 1.2em; margin-right: 10px;">•</span>
+                <span><strong>Identificación de Errores:</strong> Taller práctico para detectar y corregir fallas en registros, fortaleciendo el <strong>cumplimiento normativo</strong>.</span>
+            </li>
+            <li style="margin-bottom: 0; display: flex; align-items: baseline;">
+                <span style="color: #3498db; font-size: 1.2em; margin-right: 10px;">•</span>
+                <span><strong>Actores Clave:</strong> Analizarás las responsabilidades éticas y legales del <strong>Patrocinador, Monitor e Investigador</strong>.</span>
+            </li>
+        </ul>
+    </div>
+
+                </div>
+            </section>
+            
+            <section class="linktree-section">
+                <div class="linktree-grid">
+
+                   <!-- Actividad Disclaimer -->
+                    <div class="link-card">
+                        <div class="link-number"> </div>
+                        <h3 class="link-title">Actividades del Módulo y Material de Soporte</h3>
+                        <p class="link-desc">Las actividades del Módulo, el Material de Soporte y las actividades para después de la sesión se encontrarán disponibles un par de horas antes de arrancar la sesión. </p>
+                        
+                    </div>    
+                   <!-- Material de Previo a la Clase 
+                    <div class="link-card">
+                    <div class="link-number"></div>
+                    <div class="link-title">Material para revisar antes de la clase</div>
+                    <div class="link-desc"><p>
+                        En el siguiente enlace encontrarás el documento oficial <strong>ICH E6 R2 - Buenas Prácticas Clínicas (GCP)</strong>, el cual será base fundamental para nuestra próxima sesión. </p>
+                    <p> Les recomendamos que revisen principalmente los capítulos que hablan sobre: </p>
+                    <br>                            
+                    <li>Principios Fundamentales </li>
+                    <li>Roles y Responsabilidades </li>
+                    <li>Documentos Esenciales</li>
+                    <br>
+                </div>
+                <a href="https://www.fda.gov/media/93884/download" target="_blank" rel="noopener noreferrer" class="link-btn">Accede al Documento <i class="fas fa-file"></i></a>
+                    </div>
+                   
+              -->                                                              
+                    <!-- Actividad 1 
+                    <div class="link-card">
+                    <div class="link-number">1</div>
+                    <div class="link-title">Actividad 1 - Taller de Revisión de Documentos Esenciales</div>
+                    <div class="link-desc">Accede al material que te indique el profesor</div>
+
+                    <button class="link-btn" onclick="toggleDropdown('actividad3')">
+                        Mostrar el material
+                        <i class="fas fa-file"></i>
+                    </button>
+
+                    <div class="dropdown-content" id="actividad3">
+                        <a href="https://1drv.ms/f/c/e7d0dde89d5474ab/Evii90uhtqxAhHS_QHcAg-0B95ciXD0AGCgTeAX4fRT3AQ?e=AMPiko" class="sub-link" target="_blank" rel="noopener noreferrer">Documentos antes del estudio - Cartas de Sometimiento </a>
+                        <a href="https://1drv.ms/b/c/e7d0dde89d5474ab/EbRGaTeA641Gl_Uqq0rTUswBOavBzagBWMHH5SHHX-ZUAQ?e=yILdud" class="sub-link" target="_blank" rel="noopener noreferrer">Documentos antes del estudio - Set de Documentos</a>
+                        <a href="https://1drv.ms/b/c/e7d0dde89d5474ab/Ee4OrXh10wNApkrkiKnEBO0Bd_mell8tMBb1R_UMYAkIEA?e=VbyYjf" class="sub-link" target="_blank" rel="noopener noreferrer">Documentos durante del estudio - Set de Documentos</a>
+                        <a href="eCRFfull.html" class="sub-link" target="_blank" rel="noopener noreferrer">Documentos durante del estudio - eCRF - General </a>
+                        <a href="eCRF.html" class="sub-link" target="_blank" rel="noopener noreferrer">Documentos durante del estudio - eCRF - Visita </a>
+                        
+                </div>             
+                </div>
+-->
+                  <!-- Actividad 2 
+                    <div class="link-card">
+                    <div class="link-number">2</div>
+                    <div class="link-title">Actividad 2 - Quizz - Reconocimiento de Principios ALCOA++ en registros/documentos</div>
+                    <div class="link-desc"><p>Actividad para poner en práctica los principios ALCOA++ </p>
+                    
+                </div>
+                <a href="https://www.menti.com/algq977oc7kp" target="_blank" rel="noopener noreferrer" class="link-btn">Accede al Quizz <i class="fas fa-question-circle"></i></a>
+                    </div>
+-->
+                    <!-- Actividad 3 
+                    <div class="link-card">
+                    <div class="link-number">3</div>
+                    <div class="link-title">Actividad 3 - Taller de Buenas Prácticas de Documentación </div>
+                    <div class="link-desc">En esta última actividad vamos a poner en práctica lo aprendido durante la sesión. </div>
+
+                    <button class="link-btn" onclick="toggleDropdown('actividad4')">
+                        Mostrar los ejercicios del taller
+                        <i class="fas fa-edit"></i>
+                    </button>
+
+                    <div class="dropdown-content" id="actividad4">
+                        <a href="https://1drv.ms/b/c/e7d0dde89d5474ab/EQO8KhOEEKxIlSbrzVwTrjYBrkCYvje53FcViRTwHto6fA?e=NUasjL" class="sub-link" target="_blank" rel="noopener noreferrer">Ejercicio 1 - Registro de Capacitación </a>
+                        <a href="https://1drv.ms/b/c/e7d0dde89d5474ab/Ec0zUAmNtEZDhkogHDEip0wB06SVBzXjpRZkPJEwh9A4ng?e=s8PbWV" class="sub-link" target="_blank" rel="noopener noreferrer">Ejercicio 2 - Registro de Delegación de Actividades</a>
+                        <a href="https://1drv.ms/b/c/e7d0dde89d5474ab/ES2xpsbOrdZHtUKai15tvFUBqFcWJToEDtMhm86uux-c8g?e=bfcLtL" class="sub-link" target="_blank" rel="noopener noreferrer">Ejercicio 3 - Registro de Temperatura</a>
+                        <a href="https://1drv.ms/b/c/e7d0dde89d5474ab/EfQuX9_3uOxJsVjLuWw8JNMBO2FSjbrlOjDAZj-uQx5-oA?e=5EPP5V" class="sub-link" target="_blank" rel="noopener noreferrer">Ejercicio 4 - Registro de Contabilidad de Medicamento</a>
+                        <a href="https://1drv.ms/b/c/e7d0dde89d5474ab/EUUWXJxbR6dHlGUNj8JZ0ycBFbVhgNJ3znFCD21dt33xiA?e=o0WObE" class="sub-link" target="_blank" rel="noopener noreferrer">Ejercicio 5 - Registro de Capacitación </a>
+                        <a href="https://1drv.ms/b/c/e7d0dde89d5474ab/EbA2oqnPVFFDl81zQfwMUx8BQJQGDgfphHJfUpyrsNhiVw?e=Jhatsh" class="sub-link" target="_blank" rel="noopener noreferrer">Ejercicio 6 - Registro de Capacitación - Formato Electrónico</a>
+ 
+                        
+                </div>             
+                </div>
+-->
+                <!-- Actividad  
+                    <div class="link-card">
+                    <div class="link-number"></div>
+                    <div class="link-title">Ejercicio de Reforzamiento</div>
+                    <div class="link-desc"><p>Actividad para poner en las buenas prácticas de documentación y los principios ALCOA++ </p>
+                        <br>
+                    <p><strong>Instrucciones:</strong></p>
+                    <br>
+                    <li>Accede a los ejercios en el enlace de abajo.</li>
+                    <li>Revisa los documentos y registros proporcionados.</li>
+                    <li>Identifica y marca los errores de documentación (puedes completarlo a mano y escanear el documento o insertar comentarios en el documento PDF).</li>
+                    <li>En la carpeta del enlace, también encontrarás las plantillas de los formatos. Elige dos documentos y complétalos de acuerdo con las Buenas Prácticas de Documentación, tomando en cuenta el protocolo de referencia.</li>
+                    <br>
+                    <p><strong>Enregables</strong></p>
+                    <li>Ejercicio completo: los documentos revisados, ya sea a mano (y escaneados) o en formato PDF con comentarios donde hayas marcado los errores.</li>
+                    <li>Dos formatos completos: selecciona dos plantillas y llénalas aplicando correctamente las Buenas Prácticas de Documentación (BPD).</li>
+                    <li>Enviar los documentos por correo a jchiquete@sioltalife.com </li>
+                    <br>
+
+                </div>
+                <a href="https://1drv.ms/f/c/e7d0dde89d5474ab/EmGgxxB3TfBNlz1ZqipnPS0BKXDS-VrmVZQP578CM87Ssw?e=9uWdoA" target="_blank" rel="noopener noreferrer" class="link-btn">Accede al ejercicio <i class="fas fa-question-circle"></i></a>
+                    </div>
+-->
+                <!-- Material de Soporte
+                    <div class="link-card">
+                        <div class="link-number"> </div>
+                        <h3 class="link-title">Curso - Buenas Prácticas Clínicas - ICH E6 R3 - Global Health Training Centre</h3>
+                        <p class="link-desc">En el siguiente enlace encontrarás el Curso de Buenas Prácticas Clínicas del Global Health Training Centre, se encuentra disponible en Español e Inglés, y al concluid y obtener una calificación de mínimo 80% se obtendrá el certificado de complimiento. El curso es completamente gratuito y puedes ir avanzando a tu propio ritmo.</p>
+                        <a href="https://globalhealthtrainingcentre.tghn.org/bpc-ich-e6-r3/" target="_blank" rel="noopener noreferrer" class="link-btn">Accede al curso <i class="fas fa-pencil"></i></a>
+                    </div>
+                     
+
+                
+</div>
+
+
+                    
+                </div>
+            </section>
+  -->           
+            <!-- Navegación entre módulos -->
+            <div class="module-nav">
+                <a href="mod-4.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Módulo Anterior</a>
+                <a href="mod-6.html" class="nav-btn">Siguiente Módulo <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer idéntico al de la landing page -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Sioltalife Educación Continua</h3>
+                    <p>Impulsando tu carrera con formación de calidad en investigación clínica y crecimiento profesional.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/sioltalife"  class="sub-link" target="_blank" rel="noopener noreferrer" ><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.tiktok.com/@sioltalife?_t=ZS-8xS1CZBnKcy&_r=1" class="sub-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.youtube.com/@SioltalifeEducaci%C3%B3nContinua"  class="sub-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.linkedin.com/company/s%C3%ADoltalife/"  class="sub-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+                        <li><a href="index.html#modules"><i class="fas fa-chevron-right"></i> Módulos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Recursos</h3>
+                    <ul>
+                        <li><a href="calendar.html"><i class="fas fa-chevron-right"></i> Calendario de Sesiones</a></li>
+                        <li><a href="glossary.html"><i class="fas fa-chevron-right"></i> Glosario </a></li>
+                        <li><a href="support.html#foro"><i class="fas fa-chevron-right"></i> Foro de Discusión</a></li>
+                        <li><a href="support.html#faqs"><i class="fas fa-chevron-right"></i> Preguntas Frecuentes</a></li>
+                        <li><a href="support.html#experts"><i class="fas fa-chevron-right"></i> Centro de Ayuda</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><a href="mailto:ventas@sioltalife.com"><i class="fas fa-envelope"></i> ventas@sioltalife.com</a></li>
+                        <li><a href="http://wa.link/kcfonq" target="_blank" rel="noopener noreferrer"><i class="fas fa-phone"></i> +52 (729) 184-8814</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Sioltalife. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+<script>
+  function toggleDropdown(id) {
+    const section = document.getElementById(id);
+    const isVisible = section.style.display === 'flex';
+    section.style.display = isVisible ? 'none' : 'flex';
+  }
+</script>
+                    
+                </div>             
+                </div>
+
+                
+
+                
+</div>
+                 
+              
+
+
+</body>
+</html>

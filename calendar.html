@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calendario Académico | Sioltalife Educación Continua</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets//favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets//favicon-16x16.png">
+    <link rel="manifest" href="assets//site.webmanifest">
+  <style>
+    :root{
+      --primary:#2D71B8;
+      --secondary:#1a4d8c;
+      --accent:#3F8FD2;
+      --light:#F0F7FF;
+      --dark:#121212;
+      --text:#333;
+      --muted:#e9eef5;
+      --gray:#6b7280;
+      --white:#fff;
+      --radius:14px;
+      --shadow:0 10px 30px rgba(0,0,0,.08);
+      --transition: all .25s ease;
+      --success:#22c55e;
+      --warning:#f59e0b;
+      --danger:#ef4444;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
+      color:var(--text);
+      background:linear-gradient(135deg,#f8fbff 0%,#e9f2ff 100%);
+      min-height:100vh; display:flex; flex-direction:column;
+    }
+    a{color:inherit;text-decoration:none}
+    /* ===== HEADER (restaurado) ===== */
+    .main-header{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:1px solid #e6edf6}
+    .header-container{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:14px 20px}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo-img{height:46px;width:auto}
+    nav ul{list-style:none;display:flex;gap:22px;flex-wrap:wrap}
+    nav a{padding:8px 2px;font-weight:500;position:relative;color:#1f2937}
+    nav a::after{content:"";position:absolute;left:0;bottom:-4px;height:2px;width:0;background:var(--primary);transition:width .2s ease}
+    nav a:hover{color:var(--primary)}
+    nav a:hover::after,nav a.active::after{width:100%}
+    nav a.active{color:var(--primary)}
+
+    /* ===== MAIN ===== */
+    .main-content{flex:1;padding:36px 0}
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+    .page-header{text-align:center;margin-bottom:26px}
+    .page-title{font-family:'Montserrat',sans-serif;font-weight:800;color:var(--primary);font-size:2.25rem;letter-spacing:.3px}
+    .page-subtitle{color:var(--secondary);margin-top:6px}
+
+    /* ===== CALENDAR WRAPPER ===== */
+    .calendar-container{
+      background:rgba(255,255,255,.96); border:1px solid #e7eef7; border-radius:var(--radius);
+      padding:24px; box-shadow:var(--shadow);
+    }
+    .calendar-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px}
+    .calendar-title{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.25rem;color:#111827}
+    .calendar-nav{display:flex;align-items:center;gap:12px}
+    .nav-btn{width:40px;height:40px;border-radius:50%;border:1px solid #d7e4f6;background:var(--light);display:grid;place-items:center;color:var(--primary);cursor:pointer;transition:var(--transition)}
+    .nav-btn:hover:not(.disabled){background:var(--primary);color:#fff;transform:translateY(-2px)}
+    .nav-btn.disabled{opacity:.45;cursor:not-allowed}
+    .current-month{min-width:200px;text-align:center;font-weight:600}
+
+    /* ===== GRID (alineado perfecto) ===== */
+    .calendar-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin:10px 0 8px}
+    .weekday{padding:8px 0;text-align:center;font-weight:600;color:var(--secondary);background:#f2f7ff;border-radius:10px;border:1px solid #e6eef9}
+    .calendar-days{
+      display:grid;grid-template-columns:repeat(7, 1fr);gap:8px;
+      /* Altura fija por fila; todas las tarjetas iguales */
+      grid-auto-rows: 160px;
+    }
+    .calendar-day{
+      height:100%;
+      background:#fbfdff;
+      border:1px solid #e6edf6;
+      border-radius:10px;
+      padding:10px;
+      display:flex;flex-direction:column;
+      position:relative; overflow:hidden;
+      transition:var(--transition);
+    }
+    .calendar-day:hover{background:#ffffff; box-shadow:0 6px 16px rgba(45,113,184,.08); transform:translateY(-2px)}
+    .calendar-day.empty{background:transparent;border:none;box-shadow:none}
+    .calendar-day.out-of-range{background:#f7f8fa;color:#9aa3ac;border:1px dashed #dfe6ee;opacity:.95}
+    .calendar-day.out-of-range .day-number{color:#b2bac5}
+    .day-number{position:absolute;top:8px;right:10px;font-weight:700;color:#6b7280;font-size:.9rem}
+
+    /* Área scrollable para eventos, manteniendo altura de la tarjeta */
+    .day-events{margin-top:26px;display:flex;flex-direction:column;gap:6px;overflow:auto}
+    .day-events::-webkit-scrollbar{width:6px}
+    .day-events::-webkit-scrollbar-thumb{background:#d7e3f6;border-radius:10px}
+
+    .calendar-event{
+      background:#ffffff;border:1px solid #e6edf6;border-left:3px solid var(--primary);
+      border-radius:8px;padding:6px 8px;font-size:.8rem;cursor:pointer;position:relative;
+      display:flex;flex-direction:column;gap:2px;transition:var(--transition)
+    }
+    .calendar-event:hover{transform:translateX(3px);box-shadow:0 4px 10px rgba(0,0,0,.06)}
+    .event-time{font-weight:700}
+    .event-title{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .event-status{position:absolute;inset:0;pointer-events:none;opacity:.08}
+    .status-delivered{background:linear-gradient(90deg, var(--success), transparent)}
+    .status-pending{background:linear-gradient(90deg, var(--warning), transparent)}
+    .status-delayed{background:linear-gradient(90deg, var(--danger), transparent)}
+
+    /* Distintivo visual para días con eventos (sin cambiar tamaño) */
+    .calendar-day.has-events{
+      box-shadow:inset 0 0 0 2px rgba(45,113,184,.18);
+    }
+    .calendar-day.has-events::before{
+      content:""; position:absolute; left:0; top:0; width:100%; height:4px; background:linear-gradient(90deg,var(--primary),var(--accent));
+    }
+    .event-dot{
+      position:absolute; left:10px; top:10px; width:8px; height:8px; border-radius:50%; background:var(--primary);
+      box-shadow:0 0 0 3px rgba(45,113,184,.15);
+    }
+
+    /* ===== MODAL ===== */
+    .event-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;align-items:center;justify-content:center}
+    .modal-content{width:92%;max-width:640px;background:#fff;border-radius:16px;padding:26px;box-shadow:0 30px 60px rgba(0,0,0,.25);position:relative}
+    .close-modal{position:absolute;right:14px;top:14px;font-size:1.4rem;color:#9aa3ac;cursor:pointer}
+    .close-modal:hover{color:#ef4444;transform:rotate(90deg)}
+    .modal-header{display:flex;align-items:center;gap:12px;padding-bottom:12px;margin-bottom:14px;border-bottom:1px solid #eef2f7}
+    .modal-status{width:14px;height:14px;border-radius:50%}
+    .modal-title{font-family:'Montserrat',sans-serif;font-size:1.3rem;font-weight:700}
+    .detail-row{display:flex;gap:10px;margin-bottom:10px}
+    .detail-label{min-width:110px;font-weight:700;color:var(--primary)}
+    .modal-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .modal-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;border:0;color:#fff;font-weight:600;cursor:pointer}
+    .btn-zoom{background:#2D8CFF}
+    .btn-material{background:var(--success)}
+    .btn-calendar{background:#ffffff}
+    .btn-close{background:#6b7280}
+
+    /* ===== FOOTER (restaurado) ===== */
+    .main-footer{margin-top:36px;background:#0f172a;color:#e5e7eb}
+    .footer-container{max-width:1200px;margin:0 auto;padding:28px 20px}
+    .footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+    .footer-col h3{font-family:'Montserrat',sans-serif;font-weight:700;margin-bottom:10px;color:#f8fafc}
+    .footer-col p{color:#cbd5e1}
+    .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:8px}
+    .footer-col a{color:#cbd5e1}
+    .footer-col a:hover{color:#fff}
+    .social-links a{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:#1e293b;color:#e5e7eb;margin-right:8px}
+    .social-links a:hover{background:#334155}
+
+    .copyright{text-align:center;margin-top:16px;color:#94a3b8;font-size:.9rem;border-top:1px solid #1f2a3b;padding-top:12px}
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px){
+      .calendar-days{grid-auto-rows: 150px;}
+    }
+    @media (max-width: 860px){
+      .footer-grid{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width: 720px){
+      .header-container{flex-direction:column}
+      .page-title{font-size:1.8rem}
+      .calendar-weekdays{display:none}
+      .calendar-days{grid-template-columns:1fr;grid-auto-rows: 140px;}
+    }
+  
+/* === Patch: sticky sub-header matching container background (no lines) === */
+:root{ --stickyTop: 0px; --calHeadH: 64px; }
+.calendar-container{ position: relative; }
+.calendar-header{
+  position: sticky; top: var(--stickyTop); z-index: 20;
+  background: inherit; border: none !important; box-shadow: none !important; margin-bottom: 0 !important;
+}
+.calendar-weekdays{
+  position: sticky; top: calc(var(--stickyTop) + var(--calHeadH)); z-index: 19;
+  background: inherit; border-top: none !important; border-bottom: none !important; margin-top: 0 !important;
+}
+
+
+/* === Patch: prevent content from stretching day cards === */
+.calendar-day{ height:100%; min-height:0; display:flex; flex-direction:column; overflow:hidden; }
+.day-events{ flex:1 1 auto; min-height:0; overflow:auto; }
+
+</style>
+
+
+<style id="slf-spacing-patch">
+.calendar-header { margin-bottom: 16px !important; }
+.calendar-weekdays { margin-top: 12px !important; }
+</style>
+
+
+
+<style id="slf-padding-patch">
+.calendar-day { padding: 16px !important; }
+.day-events { margin-top: 32px !important; }
+</style>
+
+
+<style id="slf-spacing-sticky-fix">
+/* Más espacio debajo de la barra de navegación (prev/next + mes) */
+.calendar-header {
+  margin-bottom: 20px !important;
+  padding-bottom: 8px !important;
+}
+
+/* Más espacio debajo de la fila de weekdays */
+.calendar-weekdays {
+  margin-bottom: 16px !important;
+  padding-bottom: 4px !important;
+}
+
+/* Separación entre weekdays y la grilla de días */
+.calendar-days {
+  margin-top: 12px !important;
+}
+</style>
+
+</head>
+<body>
+  <!-- ===== Header ===== -->
+  <header class="main-header">
+    <div class="header-container">
+      <div class="logo">
+        <a href="index.html">
+          <img class="logo-img" alt="Logo Sioltalife" src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_300,w_300,f_auto,q_auto/1187729/437761_723752.png"/>
+        </a>
+      </div>
+      <nav>
+        <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="index.html#modules"><i class="fas fa-book"></i> Módulos</a></li>
+                    <li><a href="calendar.html"><i class="fas fa-calendar"></i> Calendario</a></li>
+                    <li><a href="support.html"><i class="fas fa-question-circle"></i> Soporte</a></li>
+                    <li><a href="glossary.html"><i class="fas fa-book-open"></i> Glosario</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main class="main-content">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="page-title">Calendario Académico</h1>
+        <p class="page-subtitle">Marzo – Abril 2026 · Sesiones, actividades y entregables</p>
+      </div>
+
+      <section class="calendar-container">
+        <div class="calendar-header">
+          <h2 class="calendar-title">Calendario del Curso</h2>
+          <div class="calendar-nav">
+            <button class="nav-btn" id="prevMonth"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="current-month" id="currentMonth">Marzo 2025</div>
+            <button class="nav-btn" id="nextMonth"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+
+        <div class="calendar-weekdays">
+          <div class="weekday">Lunes</div>
+          <div class="weekday">Martes</div>
+          <div class="weekday">Miércoles</div>
+          <div class="weekday">Jueves</div>
+          <div class="weekday">Viernes</div>
+          <div class="weekday">Sábado</div>
+          <div class="weekday">Domingo</div>
+        </div>
+
+        <div class="calendar-days" id="calendarDays"><!-- JS injects days --></div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ===== Modal ===== -->
+  <div class="event-modal" id="eventModal">
+    <div class="modal-content">
+      <span class="close-modal" id="closeModal"><i class="fa-solid fa-xmark"></i></span>
+      <div class="modal-header">
+        <div class="modal-status" id="modalStatus"></div>
+        <h3 class="modal-title" id="modalTitle">Título del evento</h3>
+      </div>
+      <div class="modal-details">
+        <div class="detail-row">
+          <div class="detail-label">Fecha:</div>
+          <div id="modalDate">sábado, 7 de marzo de 2026</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Hora:</div>
+          <div id="modalTime">08:00 - 12:00</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Estado:</div>
+          <div id="modalStatusText">En proceso</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Descripción:</div>
+          <div id="modalDescription">Detalles del evento.</div>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <a class="modal-btn btn-zoom" id="modalZoomLink" href="#" target="_blank" rel="noopener"><i class="fa-solid fa-video"></i> Unirse a Zoom</a>
+        <a class="modal-btn btn-material" id="modalMaterialLink" href="#" target="_blank" rel="noopener"><i class="fa-solid fa-file-lines"></i> Ver Material</a>
+        <button class="modal-btn btn-calendar" id="modalCalendarLink"><i ></i> </button>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Footer ===== -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>Sioltalife Educación Continua</h3>
+          <p>Impulsando tu carrera con formación de calidad en investigación clínica y crecimiento profesional.</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/sioltalife" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.tiktok.com/@sioltalife?_t=ZS-8xS1CZBnKcy&_r=1" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.youtube.com/@SioltalifeEducaci%C3%B3nContinua" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.linkedin.com/company/s%C3%ADoltalife/" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Enlaces Rápidos</h3>
+          <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+                        <li><a href="index.html#modules"><i class="fas fa-chevron-right"></i> Módulos</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Recursos</h3>
+          <ul>
+                        <li><a href="calendar.html"><i class="fas fa-chevron-right"></i> Calendario de Sesiones</a></li>
+                        <li><a href="glossary.html"><i class="fas fa-chevron-right"></i> Glosario </a></li>
+                        <li><a href="support.html#foro"><i class="fas fa-chevron-right"></i> Foro de Discusión</a></li>
+                        <li><a href="support.html#faqs"><i class="fas fa-chevron-right"></i> Preguntas Frecuentes</a></li>
+                        <li><a href="support.html#experts"><i class="fas fa-chevron-right"></i> Centro de Ayuda</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Contacto</h3>
+          <ul>
+            <li><a href="mailto:ventas@sioltalife.com"><i class="fa-solid fa-envelope"></i> ventas@sioltalife.com</a></li>
+            <li><a href="http://wa.link/kcfonq" target="_blank" rel="noopener"><i class="fa-solid fa-phone"></i> +52 (729) 184-8814</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">© 2026 Sioltalife. Todos los derechos reservados.</div>
+    </div>
+  </footer>
+
+  <script>
+    /* ==== Configuración del rango visible ==== */
+    const COURSE_START = new Date(2026,2,7);            // 30-mar-2026 (mes 2 = marzo)
+    const COURSE_END   = new Date(2026,3,30,23,59,59);   // 30-abr-2026
+    const MIN_MONTH = {y:2026,m:2};  // marzo
+    const MAX_MONTH = {y:2026,m:3};  // octubre
+
+    /* ==== Eventos de ejemplo  ==== */
+    
+
+const eventos = [
+  // Sesiones del curso (sábados)
+  { id: 1, titulo: "Sesión 1 · Módulo 1: Introducción a la Investigación Clínica", fecha: new Date(2026,2,07,10,0), hora: "08:00 - 12:00",
+    descripcion: "Historia y evolución de la Investigación Clínica • Proceso de descubrimiento y etapa preclínica • Definición y conceptos fundamentales de IC y EC • Fases del Desarrollo Clínico: Fase 0, I, II, III y IV.Fases del desarrollo de un medicamento • ¿Para qué hacemos investigación clínica? • ¿Qué es la investigación clínica? • Historia y evolución de la investigación clínica", enlaceMaterial: "mod-1.html", enlaceZoom: "https://us05web.zoom.us/j/87327551238" },
+
+  { id: 2, titulo: "Sesión 2 · Módulo 2 (Parte A): Diseño Científico y Metodología ", fecha: new Date(2026,2,14,10,0), hora: "08:00 - 11:00",
+    descripcion: "Búsqueda y marco de referencias para protocolos • Metodologías de investigación (Observacionales vs. Experimentales) • Tipos de variables (Identificación, escalas y operacionalización) • Tamaño muestral (Poder estadístico y margen de error) • Análisis de datos e interpretación (Significancia y relevancia clínica).", enlaceMaterial: "mod-2.html", enlaceZoom: "https://us05web.zoom.us/j/87327551238" },
+
+  { id: 3, titulo: "Sesión 3 · Módulo 2 (Parte B): Diseños Avanzados y Validez", fecha: new Date(2026,2,21,10,0), hora: "08:00 - 11:00",
+    descripcion: "Principios éticos en investigación clínica • Origen histórico de la ética y marcos regulatorios • Documentos y lineamientos internacionales y nacionales • Protección de los participantes en estudios clínicos • Dilemas éticos en la práctica profesional"
+, enlaceMaterial: "mod-2.html", enlaceZoom: "https://us05web.zoom.us/j/87327551238" },
+
+ { id: 4, titulo: "Sesión 4 · Módulo 3: Ética en la investigación clínica: un punto de vista práctico", fecha: new Date(2026,2,28,10,0), hora: "08:00 - 12:00",
+    descripcion: "Principios éticos en investigación clínica • Origen histórico de la ética y marcos regulatorios • Documentos y lineamientos internacionales y nacionales • Protección de los participantes en estudios clínicos • Dilemas éticos en la práctica profesional"
+, enlaceMaterial: "mod-3.html", enlaceZoom: "https://us05web.zoom.us/j/87327551238" },
+
+  { id: 5, titulo: "Sesión 5 · Módulo 4: Regulación en estudios clínicos", fecha: new Date(2026,3,4,10,0), hora: "08:00 - 12:00",
+    descripcion: "Regulación mexicana • Regulación estadounidense • Regulación en la Unión Europea • Ventajas y desventajas entre marcos regulatorios • Organismos internacionales "
+, enlaceMaterial: "mod-4.html", enlaceZoom: "https://us05web.zoom.us/j/87327551238" },
+
+  { id: 6, titulo: "Sesión 6 · Módulo 5 (Parte A): Buenas Prácticas Clínicas (BPC) y Actores", fecha: new Date(2026,3,11,10,0), hora: "08:00 - 11:00",
+    descripcion: "Sesión de profundización teórica y arranque de taller • Definición técnica de EC según BPC • Los 13 Principios de la ICH-GCP R2 • Responsabilidades de Patrocinador, Monitor e Investigador • Documentos Esenciales (Sección 8) • Enfoque en el protocolo clínico."
+, enlaceMaterial: "mod-5.html", enlaceZoom: "https://us05web.zoom.us/j/87327551238" },
+
+  { id: 7, titulo: "Sesión 7 · Módulo 5 (Parte B): Gestión Operativa y Calidad", fecha: new Date(2026,3,18,10,0), hora: "08:00 - 11:00",
+    descripcion: "Buenas Prácticas de Documentación (BPD): Profundización en Principios ALCOA++ • Taller: Revisión de Documentos Esenciales y detección de errores comunes • Taller: Llenado de registros y correcciones bajo estándar ALCOA."
+, enlaceMaterial: "mod-5.html", enlaceZoom: "https://us05web.zoom.us/j/87327551238" },
+
+{ id: 8, titulo: "Sesión 8 · Módulo 6: El campo laboral de la investigación clínica", fecha: new Date(2026,3,25,10,0), hora: "08:00 - 12:00",
+    descripcion: "¿Por qué investigación clínica? • Los principales actores de la investigación clínica • Roles de entrada en la industria biofarmacéutica • Roles de entrada en una CRO • Competencias y habilidades clave"
+, enlaceMaterial: "mod-6.html", enlaceZoom: "https://us05web.zoom.us/j/87327551238" },
+
+{ id: 9, titulo: "Tarea 1 · Módulo 1: Aplicación de las SPIRIT Guidelines y análisis de evidencia científica", fecha: new Date(2025,8,15,10,0), hora: "23:59",
+    descripcion: "Como parte del Módulo 1-2, deberán realizar una actividad orientada a profundizar en dos aspectos clave: • La aplicación práctica de las SPIRIT Guidelines 2025 en el diseño de protocolos clínicos. • El uso del método científico para analizar la evidencia disponible sobre la vacuna rusa EnteroMix contra cáncer."
+, enlaceMaterial: "https://1drv.ms/b/c/e7d0dde89d5474ab/Eb2ejEoogZBFvRbRq3aftYQBOCRKSDqJRoi62yFdjc_ASg?e=lOqqS3",  },
+
+{ id: 10, titulo: "Tarea 2 · Módulo 3: Aprendiendo a dictaminar - Parte 2 ", fecha: new Date(2025,8,21,10,0), hora: "23:59",
+    descripcion: "El entregable de esta actividad será un documento tipo oficio donde deberán describir sus observaciones consensadas del material revisado (aspectos éticos) y su veredicto."
+, enlaceMaterial: "https://1drv.ms/f/c/e7d0dde89d5474ab/EmL3naVdGrNGuXoJFKFu1DwBeLp0wnUVHF5LnMd_-ojTUg?e=8YBbzf",  },
+
+{ id: 11, titulo: "Tarea 3 · Módulo 4: Del papel a la práctica: análisis de los compromisos regulatorios en investigación clínica ", fecha: new Date(2025,8,29,10,0), hora: "23:59",
+    descripcion: "El entregable de esta actividad será un informe breve (1–1.5 cuartillas) en PDF que incluya: - Listado de los compromisos identificados. -Análisis del nivel de implementación según Cofepris.-Una reflexión crítica sobre las implicaciones para la investigación clínica en México. "
+, enlaceMaterial: "hhttps://1drv.ms/f/c/e7d0dde89d5474ab/Ery_1UIHolhCn9C8l-nAKV4BOZZnme32fTLOm44K3pWzkw?e=zN1Dwu",  },
+
+  // Ejemplos de INSTRUCCIONES 
+  
+];
+
+
+
+    /* ==== Estado ==== */
+    let currentDate = new Date(2026,2,1); // Mostrar Marzo al cargar
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCalendar();
+      setupListeners();
+      updateNavButtons();
+    });
+
+    /* ==== Render del calendario (semanas empiezan en lunes) ==== */
+    function renderCalendar(){
+      const wrap = document.getElementById('calendarDays');
+      wrap.innerHTML = '';
+
+      const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+      const lastDay  = new Date(currentDate.getFullYear(), currentDate.getMonth()+1, 0);
+
+      // Ajuste lunes=0..domingo=6
+      const jsFirst = firstDay.getDay(); // 0=dom..6=sab
+      const startDay = jsFirst === 0 ? 6 : jsFirst - 1;
+
+      const monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+      document.getElementById('currentMonth').textContent = monthNames[currentDate.getMonth()] + ' ' + currentDate.getFullYear();
+
+      // Celdas vacías al inicio
+      for(let i=0;i<startDay;i++){
+        const empty = document.createElement('div');
+        empty.className = 'calendar-day empty';
+        wrap.appendChild(empty);
+      }
+
+      for(let d=1; d<=lastDay.getDate(); d++){
+        const cell = document.createElement('div');
+        cell.className = 'calendar-day';
+
+        const dateObj = new Date(currentDate.getFullYear(), currentDate.getMonth(), d);
+
+        const dayNumber = document.createElement('div');
+        dayNumber.className = 'day-number';
+        dayNumber.textContent = d;
+        cell.appendChild(dayNumber);
+
+        const dayEvents = document.createElement('div');
+        dayEvents.className = 'day-events';
+
+        const eventsToday = eventos.filter(e=> e.fecha.getFullYear()===dateObj.getFullYear() && e.fecha.getMonth()===dateObj.getMonth() && e.fecha.getDate()===dateObj.getDate());
+
+        if(eventsToday.length){
+          // marca visual sin cambiar tamaño
+          cell.classList.add('has-events');
+          const dot = document.createElement('span');
+          dot.className = 'event-dot';
+          cell.appendChild(dot);
+        }
+
+        for(const ev of eventsToday){
+          const el = document.createElement('div');
+          el.className = 'calendar-event';
+          el.dataset.id = ev.id;
+          el.innerHTML = `
+            <div class="event-time">${ev.hora || ''}</div>
+            <div class="event-title" title="${ev.titulo.replace(/"/g,'&quot;')}">${ev.titulo}</div>
+            <div class="event-status status-${ev.estado || 'pending'}"></div>
+          `;
+          el.addEventListener('click', ()=> openEventModal(ev));
+          dayEvents.appendChild(el);
+        }
+
+        cell.appendChild(dayEvents);
+
+        // Grisar fuera de rango
+        if (stripTime(dateObj) < stripTime(COURSE_START) || stripTime(dateObj) > stripTime(COURSE_END)){
+          cell.classList.add('out-of-range');
+        }
+
+        wrap.appendChild(cell);
+      }
+    }
+
+    /* ==== Navegación restringida a ago–oct ==== */
+    function updateNavButtons(){
+      const prev = document.getElementById('prevMonth');
+      const next = document.getElementById('nextMonth');
+      const atMin = currentDate.getFullYear()===MIN_MONTH.y && currentDate.getMonth()===MIN_MONTH.m;
+      const atMax = currentDate.getFullYear()===MAX_MONTH.y && currentDate.getMonth()===MAX_MONTH.m;
+      prev.classList.toggle('disabled', atMin);
+      next.classList.toggle('disabled', atMax);
+    }
+    function setupListeners(){
+      document.getElementById('prevMonth').addEventListener('click', function(){
+        if(this.classList.contains('disabled')) return;
+        currentDate.setMonth(currentDate.getMonth()-1);
+        renderCalendar(); updateNavButtons();
+      });
+      document.getElementById('nextMonth').addEventListener('click', function(){
+        if(this.classList.contains('disabled')) return;
+        currentDate.setMonth(currentDate.getMonth()+1);
+        renderCalendar(); updateNavButtons();
+      });
+
+      document.getElementById('closeModal').addEventListener('click', closeEventModal);
+      document.getElementById('modalCloseBtn').addEventListener('click', closeEventModal);
+      document.getElementById('eventModal').addEventListener('click', (e)=>{ if(e.target.id==='eventModal') closeEventModal(); });
+    }
+
+    /* ==== Modal + .ics ==== */
+    function openEventModal(ev){
+      const modal = document.getElementById('eventModal');
+      const statusMap = {
+        delivered:{text:'Entregado', color:'#22c55e'},
+        pending:{text:'Pendiente', color:'#f59e0b'},
+        delayed:{text:'Retrasado', color:'#ef4444'}
+      };
+      document.getElementById('modalTitle').textContent = ev.titulo;
+      document.getElementById('modalDate').textContent = ev.fecha.toLocaleDateString('es-MX', {weekday:'long',year:'numeric',month:'long',day:'numeric'});
+      document.getElementById('modalTime').textContent = ev.hora || '';
+      document.getElementById('modalDescription').textContent = ev.descripcion || '';
+      const st = statusMap[ev.estado || 'pending'];
+      document.getElementById('modalStatus').style.background = st.color;
+      document.getElementById('modalStatusText').textContent = st.text;
+
+      const zl = document.getElementById('modalZoomLink');
+      const ml = document.getElementById('modalMaterialLink');
+      zl.style.display = ev.enlaceZoom ? 'inline-flex' : 'none';
+      ml.style.display = ev.enlaceMaterial ? 'inline-flex' : 'none';
+      if(ev.enlaceZoom) zl.href = ev.enlaceZoom;
+      if(ev.enlaceMaterial) ml.href = ev.enlaceMaterial;
+
+      document.getElementById('modalCalendarLink').onclick = ()=> generateIcs(ev);
+      modal.style.display = 'flex';
+    }
+    function closeEventModal(){ document.getElementById('eventModal').style.display = 'none'; }
+
+    function generateIcs(ev){
+      const pad = n => String(n).padStart(2,'0');
+      const toICS = d => `${d.getUTCFullYear()}${pad(d.getUTCMonth()+1)}${pad(d.getUTCDate())}T${pad(d.getUTCHours())}${pad(d.getUTCMinutes())}00Z`;
+      const start = new Date(ev.fecha);
+      const end = new Date(start); // intenta parsear rango hora "HH:MM - HH:MM"
+      const range = (ev.hora||'').split('-').map(s=>s.trim());
+      if(range.length===2){
+        const [sh,sm] = range[0].split(':').map(Number);
+        const [eh,em] = range[1].split(':').map(Number);
+        start.setHours(sh||start.getHours(), sm||0);
+        end.setHours(eh||(sh+2), em||0);
+      }else{
+        end.setHours(end.getHours()+2);
+      }
+
+      const ics = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Sioltalife//Calendario Curso//ES',
+        'BEGIN:VEVENT',
+        `UID:${ev.id}@sioltalife.com`,
+        `DTSTAMP:${toICS(new Date())}`,
+        `DTSTART:${toICS(start)}`,
+        `DTEND:${toICS(end)}`,
+        `SUMMARY:${ev.titulo}`,
+        `DESCRIPTION:${(ev.descripcion||'').replace(/\n/g,'\\n')}\\nZoom:${ev.enlaceZoom||'N/D'}\\nMaterial:${ev.enlaceMaterial||'N/D'}`,
+        `URL:${ev.enlaceZoom||''}`,
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+
+      const blob = new Blob([ics], {type:'text/calendar;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = `evento-${(ev.titulo||'curso').replace(/\s+/g,'-')}.ics`;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    
+/* Sticky offset to avoid overlapping the site header */
+document.addEventListener('DOMContentLoaded', () => {
+  const siteHeader = document.querySelector('header');
+  const top = siteHeader ? siteHeader.offsetHeight : 0;
+  const calHeader = document.querySelector('.calendar-header');
+  const h = calHeader ? calHeader.offsetHeight : 64;
+  document.documentElement.style.setProperty('--stickyTop', top + 'px');
+  document.documentElement.style.setProperty('--calHeadH', h + 'px');
+});
+
+    /* ==== Utils ==== */
+    function stripTime(d){ return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+  </script>
+</body>
+</html>

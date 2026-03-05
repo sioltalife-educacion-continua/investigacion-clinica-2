@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eCRF - Protocolo SIOLTA-AHE-3 - Sioltalife Educación Continua</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets//favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets//favicon-16x16.png">
+    <link rel="manifest" href="assets//site.webmanifest">
+    <style>
+        :root {
+            --primary: #2D71B8;
+            --secondary: #1a4d8c;
+            --accent: #3F8FD2;
+            --light: #F0F7FF;
+            --dark: #1f1f1f;
+            --text: #333;
+            --gray: #6c757d;
+            --white: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8fcff 0%, #e6f2ff 100%);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* HEADER CON NOMBRE DEL CURSO */
+        .full-width-header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-img {
+            height: 50px;
+            width: auto;
+        }
+        
+        .course-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-left: 15px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(45, 113, 184, 0.2);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Contenido principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+        
+        /* FOOTER DE ANCHO COMPLETO */
+        .full-width-footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 100%);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: auto;
+            width: 100%;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-col ul li a:hover {
+            color: var(--accent);
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+                padding: 15px 0;
+            }
+            
+            .logo-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .course-name {
+                margin-left: 0;
+                padding-left: 0;
+                border-left: none;
+                border-top: 2px solid rgba(45, 113, 184, 0.2);
+                padding-top: 10px;
+                margin-top: 10px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .logo-img {
+                height: 40px;
+            }
+            
+            .footer-grid {
+                gap: 30px;
+            }
+        }
+
+        /* ESTILOS DEL eCRF (CÓDIGO QUE CREASTE) */
+        .ecrf-container {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .ecrf-title {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .section { 
+            margin-bottom: 30px; 
+            border: 1px solid #ddd; 
+            padding: 20px;
+            border-radius: 8px;
+            background: var(--light);
+        }
+        
+        .section-title { 
+            background-color: var(--primary);
+            color: white;
+            padding: 15px; 
+            margin: -20px -20px 20px -20px;
+            border-radius: 8px 8px 0 0;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+        
+        input, select, textarea { 
+            margin: 8px 5px; 
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+            max-width: 300px;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .required::after { 
+            content: " *"; 
+            color: red; 
+        }
+        
+        .button { 
+            background-color: var(--primary); 
+            color: white; 
+            padding: 12px 25px; 
+            border: none; 
+            cursor: pointer; 
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            display: block;
+            margin: 30px auto 0;
+            font-size: 1.1rem;
+        }
+        
+        .button:hover { 
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: 500;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin: 10px 0;
+        }
+
+        .radio-group label {
+            display: inline-flex;
+            align-items: center;
+            margin: 0;
+        }
+
+        .radio-group input[type="radio"] {
+            width: auto;
+            margin-right: 5px;
+        }
+
+        h3 {
+            color: var(--secondary);
+            margin: 25px 0 15px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        hr {
+            margin: 20px 0;
+            border: none;
+            border-top: 1px solid #ddd;
+        }
+
+        .ae-entry {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header con nombre del curso -->
+    <header class="full-width-header">
+        <div class="header-container">
+            <div class="logo-container">
+                <div class="logo">
+                    <a href="#">
+                        <img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_300,w_300,f_auto,q_auto/1187729/437761_723752.png" 
+                             alt="Logo Academia Digital" 
+                             class="logo-img">
+                    </a>
+                    <!-- Nombre del curso añadido aquí -->
+                    <div class="course-name">Sioltalife Educación Continua</div>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li><a href="index.html#modules"><i class="fas fa-book"></i> Módulos</a></li>
+                    <li><a href="calendar.html"><i class="fas fa-calendar"></i> Calendario</a></li>
+                    <li><a href="support.html"><i class="fas fa-question-circle"></i> Soporte</a></li>
+                    <li><a href="glossary.html"><i class="fas fa-book-open"></i> Glosario</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- CONTENIDO DEL eCRF -->
+        <div class="ecrf-container">
+            <h1 class="ecrf-title">eCRF - Protocolo SIOLTA-AHE-3</h1>
+            
+            <!-- Sección 1: Datos Demográficos -->
+            <div class="section">
+                <div class="section-title">1. DATOS DEMOGRÁFICOS</div>
+                <form id="demographic-data">
+                    <label class="required">Código del paciente:</label>
+                    <input type="text" id="patient-code" name="patient-code" required>
+                    
+                    <label class="required">Iniciales:</label>
+                    <input type="text" id="initials" name="initials" required>
+                    
+                    <label class="required">Fecha de nacimiento:</label>
+                    <input type="date" id="birthdate" name="birthdate" required>
+                    
+                    <label class="required">Edad:</label>
+                    <input type="number" id="age" name="age" min="18" required> años
+                    
+                    <label class="required">Sexo:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="male" name="gender" value="male" required>
+                        <label for="male">Masculino</label>
+                        <input type="radio" id="female" name="gender" value="female">
+                        <label for="female">Femenino</label>
+                    </div>
+                    
+                    <label class="required">Peso:</label>
+                    <input type="number" id="weight" name="weight" min="0" step="0.1" required> kg
+                    
+                    <label class="required">Talla:</label>
+                    <input type="number" id="height" name="height" min="0" required> cm
+                    
+                    <label class="required">ECOG:</label>
+                    <select id="ecog" name="ecog" required>
+                        <option value="">Seleccionar</option>
+                        <option value="0">0 - Actividad normal</option>
+                        <option value="1">1 - Sintomático pero ambulatorio</option>
+                        <option value="2">2 - En cama <50% del tiempo</option>
+                    </select>
+                </form>
+            </div>
+            
+            <!-- Sección 2: Criterios de Elegibilidad -->
+            <div class="section">
+                <div class="section-title">2. CRITERIOS DE ELEGIBILIDAD</div>
+                <form id="eligibility-criteria">
+                    <label class="required">¿Cumple todos los criterios de inclusión?</label>
+                    <div class="radio-group">
+                        <input type="radio" id="inclusion-yes" name="inclusion" value="yes" required>
+                        <label for="inclusion-yes">Sí</label>
+                        <input type="radio" id="inclusion-no" name="inclusion" value="no">
+                        <label for="inclusion-no">No</label>
+                    </div>
+                    
+                    <div id="exclusion-reason" style="display:none;">
+                        <label>Razón de exclusión:</label>
+                        <select id="exclusion-reason-select">
+                            <option value="">Seleccionar</option>
+                            <option value="1">No cumple criterio diagnóstico</option>
+                            <option value="2">Edad menor a 18 años</option>
+                            <option value="3">No firmó consentimiento informado</option>
+                            <!-- Más opciones según protocolo -->
+                        </select>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Sección 3: Historia de la Enfermedad -->
+            <div class="section">
+                <div class="section-title">3. HISTORIA DE LA ENFERMEDAD</div>
+                <form id="disease-history">
+                    <label class="required">Fecha de diagnóstico:</label>
+                    <input type="date" id="diagnosis-date" name="diagnosis-date" required>
+                    
+                    <label class="required">Estadio TNM (8va edición):</label>
+                    <select id="tnm-stage" name="tnm-stage" required>
+                        <option value="">Seleccionar</option>
+                        <option value="IIIa">IIIa</option>
+                        <option value="IIIb">IIIb</option>
+                        <option value="IIIc">IIIc</option>
+                    </select>
+                    
+                    <label>Localización del tumor:</label>
+                    <textarea id="tumor-location" name="tumor-location" rows="2" cols="50"></textarea>
+                    
+                    <label>Antecedentes patológicos relevantes:</label>
+                    <textarea id="medical-history" name="medical-history" rows="3" cols="50"></textarea>
+                </form>
+            </div>
+            
+            <!-- Sección 4: Tratamiento -->
+            <div class="section">
+                <div class="section-title">4. TRATAMIENTO</div>
+                <form id="treatment-data">
+                    <label class="required">Grupo de tratamiento:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="group-a" name="treatment-group" value="A" required>
+                        <label for="group-a">A (Sioltumomab + QT-RT)</label>
+                        <input type="radio" id="group-b" name="treatment-group" value="B">
+                        <label for="group-b">B (QT-RT)</label>
+                    </div>
+                    
+                    <h3>Sioltumomab</h3>
+                    <label class="required">Fecha primera dosis:</label>
+                    <input type="date" id="sioltumomab-start" name="sioltumomab-start">
+                    
+                    <label>Número total de dosis administradas:</label>
+                    <input type="number" id="sioltumomab-doses" name="sioltumomab-doses" min="0">
+                    
+                    <h3>Quimioterapia</h3>
+                    <label>Esquema:</label>
+                    <select id="chemotherapy-regimen" name="chemotherapy-regimen">
+                        <option value="">Seleccionar</option>
+                        <option value="cisplatin-etoposide">Cisplatino + Etopósido</option>
+                        <option value="carboplatin-paclitaxel">Carboplatino + Paclitaxel</option>
+                    </select>
+                    
+                    <label>Ciclos completados:</label>
+                    <input type="number" id="chemotherapy-cycles" name="chemotherapy-cycles" min="0">
+                    
+                    <h3>Radioterapia</h3>
+                    <label>Dosis total administrada:</label>
+                    <input type="number" id="rt-dose" name="rt-dose" min="0"> Gy
+                    
+                    <label>Fecha inicio:</label>
+                    <input type="date" id="rt-start" name="rt-start">
+                    
+                    <label>Fecha fin:</label>
+                    <input type="date" id="rt-end" name="rt-end">
+                </form>
+            </div>
+            
+            <!-- Sección 5: Evaluación de Eficacia -->
+            <div class="section">
+                <div class="section-title">5. EVALUACIÓN DE EFICACIA</div>
+                <form id="efficacy-data">
+                    <h3>Supervivencia Global</h3>
+                    <label class="required">Fecha de inclusión:</label>
+                    <input type="date" id="inclusion-date" name="inclusion-date" required>
+                    
+                    <label class="required">Fecha de último seguimiento:</label>
+                    <input type="date" id="last-followup" name="last-followup" required>
+                    
+                    <label class="required">Estado:</label>
+                    <div class="radio-group">
+                        <input type="radio" id="alive" name="vital-status" value="alive" required>
+                        <label for="alive">Vivo</label>
+                        <input type="radio" id="deceased" name="vital-status" value="deceased">
+                        <label for="deceased">Fallecido</label>
+                    </div>
+                    
+                    <div id="death-date" style="display:none;">
+                        <label>Fecha de fallecimiento:</label>
+                        <input type="date" id="death-date-input" name="death-date-input">
+                    </div>
+                    
+                    <h3>Respuesta Tumoral (RECIST 1.1)</h3>
+                    <label>Evaluación basal:</label>
+                    <input type="date" id="baseline-assessment" name="baseline-assessment">
+                    
+                    <label>Respuesta:</label>
+                    <select id="tumor-response" name="tumor-response">
+                        <option value="">Seleccionar</option>
+                        <option value="RC">Respuesta Completa (RC)</option>
+                        <option value="RP">Respuesta Parcial (RP)</option>
+                        <option value="EE">Enfermedad Estable (EE)</option>
+                        <option value="EP">Enfermedad Progresiva (EP)</option>
+                    </select>
+                </form>
+            </div>
+            
+            <!-- Sección 6: Eventos Adversos -->
+            <div class="section">
+                <div class="section-title">6. EVENTOS ADVERSOS</div>
+                <form id="adverse-events">
+                    <label class="required">¿Presentó eventos adversos?</label>
+                    <div class="radio-group">
+                        <input type="radio" id="ae-yes" name="adverse-events" value="yes" required>
+                        <label for="ae-yes">Sí</label>
+                        <input type="radio" id="ae-no" name="adverse-events" value="no">
+                        <label for="ae-no">No</label>
+                    </div>
+                    
+                    <div id="ae-details" style="display:none;">
+                        <button type="button" id="add-ae" class="button" style="margin: 15px 0; background: var(--accent);">Agregar Evento Adverso</button>
+                        <div id="ae-entries"></div>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Sección 7: Calidad de Vida -->
+            <div class="section">
+                <div class="section-title">7. CALIDAD DE VIDA (EORTC QLQ-C30 y QLQ-LC13)</div>
+                <form id="quality-of-life">
+                    <label>¿Se realizaron evaluaciones de calidad de vida?</label>
+                    <div class="radio-group">
+                        <input type="radio" id="qol-yes" name="quality-of-life" value="yes">
+                        <label for="qol-yes">Sí</label>
+                        <input type="radio" id="qol-no" name="quality-of-life" value="no">
+                        <label for="qol-no">No</label>
+                    </div>
+                    
+                    <div id="qol-details" style="display:none;">
+                        <label>Resultados:</label>
+                        <textarea id="qol-results" name="qol-results" rows="4" cols="50"></textarea>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Sección 8: Comentarios -->
+            <div class="section">
+                <div class="section-title">8. COMENTARIOS DEL INVESTIGADOR</div>
+                <form id="investigator-comments">
+                    <textarea id="comments" name="comments" rows="4" cols="50" placeholder="Comentarios adicionales..."></textarea>
+                </form>
+            </div>
+            
+            <button class="button" onclick="validateAndSubmit()">Guardar y Enviar</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="full-width-footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Sioltalife Educación Continua</h3>
+                    <p>Impulsando tu carrera con formación de calidad en investigación clínica y crecimiento profesional.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/sioltalife" class="sub-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.tiktok.com/@sioltalife?_t=ZS-8xS1CZBnKcy&_r=1" class="sub-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.youtube.com/@SioltalifeEducaci%C3%B3nContinua" class="sub-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.linkedin.com/company/s%C3%ADoltalife/" class="sub-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Inicio</a></li>
+                        <li><a href="index.html#modules"><i class="fas fa-chevron-right"></i> Módulos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Recursos</h3>
+                    <ul>
+                        <li><a href="calendar.html"><i class="fas fa-chevron-right"></i> Calendario de Sesiones</a></li>
+                        <li><a href="glossary.html"><i class="fas fa-chevron-right"></i> Glosario</a></li>
+                        <li><a href="support.html#foro"><i class="fas fa-chevron-right"></i> Foro de Discusión</a></li>
+                        <li><a href="support.html#faqs"><i class="fas fa-chevron-right"></i> Preguntas Frecuentes</a></li>
+                        <li><a href="support.html#experts"><i class="fas fa-chevron-right"></i> Centro de Ayuda</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><a href="mailto:ventas@sioltalife.com"><i class="fas fa-envelope"></i> ventas@sioltalife.com</a></li>
+                        <li><a href="http://wa.link/kcfonq" class="sub-link" target="_blank" rel="noopener noreferrer"><i class="fas fa-phone"></i> +52 (729) 184-8814</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Sioltalife. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Funcionalidad para mostrar/ocultar secciones condicionales
+        document.getElementById('inclusion-no').addEventListener('change', function() {
+            document.getElementById('exclusion-reason').style.display = this.checked ? 'block' : 'none';
+        });
+        
+        document.getElementById('inclusion-yes').addEventListener('change', function() {
+            document.getElementById('exclusion-reason').style.display = 'none';
+        });
+        
+        document.getElementById('deceased').addEventListener('change', function() {
+            document.getElementById('death-date').style.display = this.checked ? 'block' : 'none';
+        });
+        
+        document.getElementById('alive').addEventListener('change', function() {
+            document.getElementById('death-date').style.display = 'none';
+        });
+        
+        document.getElementById('ae-yes').addEventListener('change', function() {
+            document.getElementById('ae-details').style.display = this.checked ? 'block' : 'none';
+        });
+        
+        document.getElementById('ae-no').addEventListener('change', function() {
+            document.getElementById('ae-details').style.display = 'none';
+        });
+        
+        document.getElementById('qol-yes').addEventListener('change', function() {
+            document.getElementById('qol-details').style.display = this.checked ? 'block' : 'none';
+        });
+        
+        document.getElementById('qol-no').addEventListener('change', function() {
+            document.getElementById('qol-details').style.display = 'none';
+        });
+        
+        // Contador para eventos adversos
+        let aeCounter = 0;
+        
+        document.getElementById('add-ae').addEventListener('click', function() {
+            aeCounter++;
+            const aeEntry = document.createElement('div');
+            aeEntry.className = 'ae-entry';
+            aeEntry.innerHTML = `
+                <h4>Evento Adverso ${aeCounter}</h4>
+                <label>Descripción:</label>
+                <input type="text" name="ae-description-${aeCounter}">
+                <label>Fecha de inicio:</label>
+                <input type="date" name="ae-start-${aeCounter}">
+                <label>Fecha de resolución:</label>
+                <input type="date" name="ae-end-${aeCounter}">
+                <label>Gravedad:</label>
+                <select name="ae-severity-${aeCounter}">
+                    <option value="">Seleccionar</option>
+                    <option value="1">Grado 1 (Leve)</option>
+                    <option value="2">Grado 2 (Moderado)</option>
+                    <option value="3">Grado 3 (Severo)</option>
+                    <option value="4">Grado 4 (Amenaza vida)</option>
+                    <option value="5">Grado 5 (Muerte)</option>
+                </select>
+                <label>Relación causal:</label>
+                <select name="ae-causality-${aeCounter}">
+                    <option value="">Seleccionar</option>
+                    <option value="definite">Definitiva</option>
+                    <option value="probable">Probable</option>
+                    <option value="possible">Posible</option>
+                    <option value="unlikely">Improbable</option>
+                    <option value="unrelated">No relacionado</option>
+                </select>
+                <hr>
+            `;
+            document.getElementById('ae-entries').appendChild(aeEntry);
+        });
+        
+        // Validación y envío del formulario
+        function validateAndSubmit() {
+            // Validación básica de campos requeridos
+            const requiredFields = document.querySelectorAll('[required]');
+            let valid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value) {
+                    valid = false;
+                    field.style.borderColor = 'red';
+                } else {
+                    field.style.borderColor = '';
+                }
+            });
+            
+            if (valid) {
+                alert('Formulario enviado correctamente');
+                // Aquí iría la lógica para enviar los datos al servidor
+            } else {
+                alert('Por favor, complete todos los campos requeridos');
+            }
+        }
+    </script>
+</body>
+</html>
