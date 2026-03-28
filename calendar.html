@@ -7,8 +7,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets//favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets//favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
     <link rel="manifest" href="assets//site.webmanifest">
   <style>
     :root{
@@ -246,7 +246,7 @@
     <div class="container">
       <div class="page-header">
         <h1 class="page-title">Calendario Académico</h1>
-        <p class="page-subtitle">Marzo – Abril 2026 · Sesiones, actividades y entregables</p>
+        <p class="page-subtitle">Marzo – Mayo 2026 · Sesiones, actividades y entregables</p>
       </div>
 
       <section class="calendar-container">
@@ -254,7 +254,7 @@
           <h2 class="calendar-title">Calendario del Curso</h2>
           <div class="calendar-nav">
             <button class="nav-btn" id="prevMonth"><i class="fa-solid fa-chevron-left"></i></button>
-            <div class="current-month" id="currentMonth">Marzo 2025</div>
+            <div class="current-month" id="currentMonth">Marzo 2026</div>
             <button class="nav-btn" id="nextMonth"><i class="fa-solid fa-chevron-right"></i></button>
           </div>
         </div>
@@ -355,9 +355,9 @@
   <script>
     /* ==== Configuración del rango visible ==== */
     const COURSE_START = new Date(2026,2,7);            // 30-mar-2026 (mes 2 = marzo)
-    const COURSE_END   = new Date(2026,3,30,23,59,59);   // 30-abr-2026
+    const COURSE_END   = new Date(2026,4,30,23,59,59);   // 30-abr-2026
     const MIN_MONTH = {y:2026,m:2};  // marzo
-    const MAX_MONTH = {y:2026,m:3};  // octubre
+    const MAX_MONTH = {y:2026,m:4};  // mayo
 
     /* ==== Eventos de ejemplo  ==== */
     
@@ -378,19 +378,19 @@ const eventos = [
     descripcion: "Principios éticos en investigación clínica • Origen histórico de la ética y marcos regulatorios • Documentos y lineamientos internacionales y nacionales • Protección de los participantes en estudios clínicos • Dilemas éticos en la práctica profesional"
 , enlaceMaterial: "mod-3.html", enlaceZoom: "https://us06web.zoom.us/j/83645397942" },
 
-  { id: 5, titulo: "Sesión 5 · Módulo 4: Regulación en estudios clínicos", fecha: new Date(2026,3,4,10,0), hora: "08:00 - 12:00",
+  { id: 5, titulo: "Sesión 5 · Módulo 4: Regulación en estudios clínicos", fecha: new Date(2026,3,11,10,0), hora: "08:00 - 12:00",
     descripcion: "Regulación mexicana • Regulación estadounidense • Regulación en la Unión Europea • Ventajas y desventajas entre marcos regulatorios • Organismos internacionales "
 , enlaceMaterial: "mod-4.html", enlaceZoom: "https://us06web.zoom.us/j/83645397942" },
 
-  { id: 6, titulo: "Sesión 6 · Módulo 5 (Parte A): Buenas Prácticas Clínicas (BPC) y Actores", fecha: new Date(2026,3,11,10,0), hora: "08:00 - 11:00",
+  { id: 6, titulo: "Sesión 6 · Módulo 5 (Parte A): Buenas Prácticas Clínicas (BPC) y Actores", fecha: new Date(2026,3,18,10,0), hora: "08:00 - 11:00",
     descripcion: "Sesión de profundización teórica y arranque de taller • Definición técnica de EC según BPC • Los 13 Principios de la ICH-GCP R2 • Responsabilidades de Patrocinador, Monitor e Investigador • Documentos Esenciales (Sección 8) • Enfoque en el protocolo clínico."
 , enlaceMaterial: "mod-5.html", enlaceZoom: "https://us06web.zoom.us/j/83645397942" },
 
-  { id: 7, titulo: "Sesión 7 · Módulo 5 (Parte B): Gestión Operativa y Calidad", fecha: new Date(2026,3,18,10,0), hora: "08:00 - 11:00",
+  { id: 7, titulo: "Sesión 7 · Módulo 5 (Parte B): Gestión Operativa y Calidad", fecha: new Date(2026,3,25,10,0), hora: "08:00 - 11:00",
     descripcion: "Buenas Prácticas de Documentación (BPD): Profundización en Principios ALCOA++ • Taller: Revisión de Documentos Esenciales y detección de errores comunes • Taller: Llenado de registros y correcciones bajo estándar ALCOA."
 , enlaceMaterial: "mod-5.html", enlaceZoom: "https://us06web.zoom.us/j/83645397942" },
 
-{ id: 8, titulo: "Sesión 8 · Módulo 6: El campo laboral de la investigación clínica", fecha: new Date(2026,3,25,10,0), hora: "08:00 - 12:00",
+{ id: 8, titulo: "Sesión 8 · Módulo 6: El campo laboral de la investigación clínica", fecha: new Date(2026,4,02,10,0), hora: "08:00 - 12:00",
     descripcion: "¿Por qué investigación clínica? • Los principales actores de la investigación clínica • Roles de entrada en la industria biofarmacéutica • Roles de entrada en una CRO • Competencias y habilidades clave"
 , enlaceMaterial: "mod-6.html", enlaceZoom: "https://us06web.zoom.us/j/83645397942" },
 
@@ -402,9 +402,14 @@ const eventos = [
     descripcion: "El entregable de esta actividad será un documento tipo oficio donde deberán describir sus observaciones consensadas del material revisado (aspectos éticos) y su veredicto."
   },
 
-{ id: 11, titulo: "Tarea 3 · Módulo 4: Del papel a la práctica: análisis de los compromisos regulatorios en investigación clínica ", fecha: new Date(2025,8,29,10,0), hora: "23:59",
-    descripcion: "El entregable de esta actividad será un informe breve (1–1.5 cuartillas) en PDF que incluya: - Listado de los compromisos identificados. -Análisis del nivel de implementación según Cofepris.-Una reflexión crítica sobre las implicaciones para la investigación clínica en México. "
-, enlaceMaterial: "hhttps://1drv.ms/f/c/e7d0dde89d5474ab/Ery_1UIHolhCn9C8l-nAKV4BOZZnme32fTLOm44K3pWzkw?e=zN1Dwu",  },
+{ id: 11, titulo: "Tarea 3 · Módulo 3: Comparación de la Ley General de Salud 2025 vs 2026 - Investigación en Seres Humanos y Comités", fecha: new Date(2026,3,4,10,0), hora: "23:59",
+    descripcion: "Entregar un analisis comparativo de al menos 5 diferencias o puntos, de la Ley General de Salud 2025 y 2026, respecto a Investigación en Seres Humanos y Comités Entregable: Documento con las 5 diferencias "
+, enlaceMaterial: "https://1drv.ms/f/c/DE6B84B5F4287D87/IgAi5DYDsOPYRpC8us1Y5IlVATrT280gGIyAp0hhbAGO0vI?e=9Vj9y5",  },
+
+{ id: 11, titulo: "Tarea 4 · Módulo 3: Actividad 7: Aprendiendo a dictaminar - Parte 2", fecha: new Date(2026,3,4,10,0), hora: "23:59",
+    descripcion: "Generación de dictamen. Posteriormente, cada grupo emitirá un dictamen para el Investigador Principal sobre los aspectos éticos del consentimiento y el protocolo, y sintetizará los hallazgos del grupo y propondrá al menos una mejora en el ICF o protocolo desde una perspectiva ética. El entregable de esta actividad será un documento tipo oficio donde deberán describir sus observaciones consensadas del material revisado y su veredicto. Cada equipo emitirá un dictamen, estos dictamenes será enviados al equipo contrario para emitir una respuesta al dictamen.El oficio se deberá compartir en el grupo de estudiantes de WhatsApp para que el otro equipo pueda descargarlo y responder al dictamen."
+, enlaceMaterial: "https://1drv.ms/f/c/DE6B84B5F4287D87/IgAbJA6HxQw0RJSxczZvSHGbAd-z9BAR64TSHIOKyXUUnLQ?e=99qaRC",  },
+
 
   // Ejemplos de INSTRUCCIONES 
   
