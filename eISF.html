@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sioltalife eISF Pro  </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="manifest" href="assets//site.webmanifest">
+    <style>
+        :root { --siolta-blue: #2D71B8; --siolta-dark: #1a4d8c; --v-bg: #f1f5f9; --v-border: #cbd5e1; --accent: #3F8FD2; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--v-bg); display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+        
+        header { background: white; padding: 10px 25px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--siolta-blue); box-shadow: 0 2px 10px rgba(0,0,0,0.05); z-index: 100; }
+        .main { display: flex; flex: 1; overflow: hidden; }
+        
+        /* Sidebar Navigation */
+        .sidebar { width: 420px; background: #fff; border-right: 1px solid var(--v-border); overflow-y: auto; flex-shrink: 0; }
+        .zone-header { background: #f8fafc; padding: 14px 20px; border-bottom: 1px solid #e2e8f0; cursor: pointer; display: flex; align-items: center; gap: 12px; }
+        .zone-header:hover { background: #f1f5f9; }
+        .zone-header strong { font-size: 0.75rem; color: var(--siolta-dark); text-transform: uppercase; font-family: 'Montserrat'; letter-spacing: 0.5px; }
+        
+        .section-list { display: none; background: #fcfcfc; }
+        .section-item { padding: 10px 45px; cursor: pointer; font-size: 0.75rem; color: #475569; border-bottom: 1px solid #f1f5f9; transition: 0.2s; display: flex; justify-content: space-between; align-items: center; }
+        .section-item:hover { background: #eff6ff; color: var(--siolta-blue); }
+        .section-item.active { background: var(--siolta-blue); color: white; font-weight: 600; }
+
+        /* Content Area */
+        .viewer { flex: 1; padding: 30px; overflow-y: auto; }
+        .breadcrumb { font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; font-weight: 700; margin-bottom: 8px; }
+        .table-wrapper { background: white; border-radius: 8px; border: 1px solid var(--v-border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; background: #f8fafc; padding: 14px; font-size: 0.65rem; color: #64748b; text-transform: uppercase; border-bottom: 2px solid #e2e8f0; }
+        td { padding: 12px 14px; border-bottom: 1px solid #f1f5f9; font-size: 0.8rem; color: #334155; }
+        
+        .code-tag { font-family: 'Courier New', monospace; font-weight: 700; color: var(--siolta-blue); padding: 2px 6px; background: #f0f7ff; border-radius: 4px; border: 1px solid #dbeafe; }
+        .status-pill { font-size: 0.65rem; font-weight: 700; padding: 3px 10px; border-radius: 12px; text-transform: uppercase; }
+        .st-present { background: #dcfce7; color: #166534; }
+        
+        footer { background: #0f172a; color: #94a3b8; padding: 12px 25px; font-size: 0.7rem; display: flex; justify-content: space-between; align-items: center; }
+    </style>
+</head>
+<body>
+    <header>
+        <div style="display:flex; align-items:center; gap:15px;">
+            <img src="https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/f_auto,q_auto/1187729/437761_723752.png" height="30">
+            <span style="font-weight:800; color:var(--siolta-blue); font-size:1rem; font-family:'Montserrat'; letter-spacing: -0.5px;">eISF DIGITAL SITE FILE</span>
+        </div>
+        <div style="font-size: 0.7rem; background: #fef3c7; color: #92400e; padding: 5px 15px; border-radius: 20px; font-weight: 700; border: 1px solid #fde68a;">
+            <i class="fas fa-microscope"></i> Site Management Mode
+        </div>
+    </header>
+
+    <div class="main">
+        <aside class="sidebar" id="isf-navigator"></aside>
+        <main class="viewer">
+            <div class="breadcrumb" id="path">Navegador de Sitio</div>
+            <h2 id="view-title" style="margin:0; color:var(--siolta-dark); font-size: 1.4rem; font-family:'Montserrat';">Panel Principal del Investigador</h2>
+            <div class="table-wrapper" style="margin-top:25px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="140">ISF Code</th>
+                            <th>Artifact Name</th>
+                            <th width="120">Status</th>
+                            <th width="80" style="text-align:center;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="artifact-table">
+                        <tr><td colspan="4" style="text-align:center; padding:100px; color:#94a3b8;">
+                            <i class="fas fa-folder-open fa-3x" style="margin-bottom:15px; display:block; opacity:0.3;"></i>
+                            Seleccione una zona y sección para visualizar los documentos del sitio.
+                        </td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div style="display:flex; gap:20px;">
+            <span><strong>Sioltalife</strong> Clinical Research Training</span>
+            <span><i class="fas fa-check-circle"></i> ISO 14155 / GCP Compliant</span>
+        </div>
+        <span id="counter">Cargando Estructura ISF...</span>
+    </footer>
+
+    <script>
+        const isfModel = {
+            "01 Planning and Procedures": {
+                "01.01 ISF Plan": ["ISF_01.01.01|ISF/eISF Index"],
+                "01.02 Feasibility": ["ISF_01.02.01|Feasibility Documentation"],
+                "01.03 Site Selection and Activation": ["ISF_01.03.01|Site Activation Document"],
+                "01.04 Recruitment": ["ISF_01.04.01|Recruitment Plan"],
+                "01.05 Guidance Documentation": ["ISF_01.05.01|Informed Consent Plan", "ISF_01.05.02|IP or Device Instructions for Handling", "ISF_01.05.03|IP or Device Labeling Plan", "ISF_01.05.04|IP or Device Transfer Documentation", "ISF_01.05.05|IP or Device Recall Plan", "ISF_01.05.06|Unblinding Plan", "ISF_01.05.07|IRT User Manual", "ISF_01.05.08|Trial Supply Plan", "ISF_01.05.09|Operational Procedure Manual", "ISF_01.05.10|Other Plan", "ISF_01.05.11|Safety Manual", "ISF_01.05.12|Site Policies or Procedures", "ISF_01.05.13|Manual", "ISF_01.05.14|Source Data Agreement", "ISF_01.05.15|Data Entry Guideline", "ISF_01.05.16|Sample Case Report Form"],
+                "01.06 System Compliance Information": ["ISF_01.06.01|System Compliance Document"]
+            },
+            "02 Study Library": {
+                "02.01 Recruitment Materials": ["ISF_02.01.01|Template Recruitment Document"],
+                "02.02 Trial Team Details": ["ISF_02.02.01|Trial Team Details"],
+                "02.03 Product or Device Materials": ["ISF_02.03.01|Investigator's Brochure", "ISF_02.03.02|Marketed Product Material"],
+                "02.04 Protocol and Amendments": ["ISF_02.04.01|Protocol", "ISF_02.04.02|Protocol Amendment", "ISF_02.04.03|Protocol Clarification", "ISF_02.04.04|Protocol Synopsis"],
+                "02.05 SIV, KOM, or Other Meeting Materials": ["ISF_02.05.01|Investigators Meeting Material", "ISF_02.05.02|Other Meeting Material"],
+                "02.06 Study Reports": ["ISF_02.06.01|Clinical Study Report"]
+            },
+            "03 Participant Materials": {
+                "03.01 Participant Logs": ["ISF_03.01.01|Participant Identification Log", "ISF_03.01.02|Participant Log"],
+                "03.02 Participant Consent": ["ISF_03.02.01|Signed ICF", "ISF_03.02.02|Source Data"],
+                "03.03 Blank Forms": ["ISF_03.03.01|Blank ICF", "ISF_03.03.02|Participant Reported Outcome Data"],
+                "03.04 Other Participant Materials": ["ISF_03.03.01|Other Information Given to Participants"]
+            },
+            "04 Regulatory Submissions": {
+                "04.01 Regulatory Decisions": ["ISF_04.01.01|Regulatory Authority Decision"],
+                "04.02 Regulatory Submissions": ["ISF_04.02.01|Regulatory Submission"],
+                "04.03 Regulatory Communications": ["ISF_04.03.01|Relevant Communications"]
+            },
+            "05 IRB or IEC": {
+                "05.01 IRB or IEC Qualifications": ["ISF_05.01.01|IRB or IEC Compliance Document", "ISF_05.01.02|IRB or IEC Composition Document", "ISF_05.01.03|IRB or IEC Non-Voting Status Document"],
+                "05.02 IRB or IEC Decisions": ["ISF_05.02.01|IRB or IEC Decision"],
+                "05.03 IRB or IEC Submissions": ["ISF_05.03.01|IRB or IEC Submission"],
+                "05.04 Import or Export Licenses": ["ISF_05.04.01|Import or Export Documentation"],
+                "05.05 IRB or IEC Communications": ["ISF_05.05.01|Relevant Communications"]
+            },
+            "06 Other Committees": {
+                "06.01 Other Committee Submissions": ["ISF_06.01.01|Other Committee Submission"],
+                "06.02 Other Committee Decisions": ["ISF_06.02.01|Other Committee Decision"],
+                "06.03 Other Committee Communications": ["ISF_06.03.01|Relevant Communications"]
+            },
+            "07 Site Documentation": {
+                "07.01 Site Contact Details": ["ISF_07.01.01|Site Contact Details"],
+                "07.02 Insurance": ["ISF_07.02.01|Insurance"],
+                "07.03 Investigator Agreements": ["ISF_07.03.01|Acceptance of Investigator Brochure", "ISF_07.03.02|Clinical Trial Agreement", "ISF_07.03.03|Confidentiality Agreement", "ISF_07.03.04|Debarment Statement", "ISF_07.03.05|Site Signature Sheet", "ISF_07.03.06|Financial Disclosure Form", "ISF_07.03.07|Form FDA 1572 or Equivalent", "ISF_07.03.08|Investigator Agreement (Device)", "ISF_07.03.09|Data Privacy Agreement", "ISF_07.03.10|Data Sharing Agreement", "ISF_07.03.11|Protocol Amendment Signature Page", "ISF_07.03.12|Protocol Signature Page"],
+                "07.04 Financial Documents": ["ISF_07.04.01|Other Financial Agreement", "ISF_07.04.02|Other Financial Document"],
+                "07.05 Site CVs and Affiliations": ["ISF_07.05.01|Principal Investigator CV", "ISF_07.05.02|Sub-Investigator CV", "ISF_07.05.03|Other Curriculum Vitae"],
+                "07.06 Site Licenses": ["ISF_07.06.01|Site Staff Qualification Supporting Info"],
+                "07.07 Site Training Evidence": ["ISF_07.07.01|Site Evidence of Training"]
+            },
+            "08 IP or Device Documentation": {
+                "08.01 Accountability": ["ISF_08.01.01|IP Accountability Documentation", "ISF_08.01.02|IP Certificate of Destruction"],
+                "08.02 Allocations": ["ISF_08.02.01|IP or Device Allocation", "ISF_08.02.02|Emergency Decoding Authorization"],
+                "08.03 Certifications": ["ISF_08.03.01|IP or Device GMP Certification", "ISF_08.03.02|IP or Device QP Certification"],
+                "08.04 Labeling": ["ISF_08.04.01|IP Re-labeling Documentation", "ISF_08.04.02|IP or Device Sample Label"],
+                "08.05 Maintenance": ["ISF_08.05.01|IP or Device Maintenance Logs"],
+                "08.06 Recalls": ["ISF_08.06.01|IP Quality Complaint Form", "ISF_08.06.02|IP Recall Documentation"],
+                "08.07 Shipments": ["ISF_08.07.01|IP Shipment Documentation"],
+                "08.08 Stability": ["ISF_08.08.01|IP or Device Stability Document"],
+                "08.09 Storage and Excursions": ["ISF_08.09.01|IP Storage Condition Documentation", "ISF_08.09.02|Storage Condition Excursion Documentation"],
+                "08.10 IP Communications": ["ISF_08.10.01|Relevant Communications"]
+            },
+            "09 Trial Supply Documentation": {
+                "09.01 Requests and Shipments": ["ISF_09.01.01|Trial Supply Shipment Documentation", "ISF_09.01.02|Trial Supply Return Documentation"],
+                "09.02 Trial Supply Storage": ["ISF_09.02.01|Trial Supply Storage Documentation"],
+                "09.03 Supply Communications": ["ISF_09.03.01|Relevant Communications"]
+            },
+            "10 Testing Facility": {
+                "10.01 Imports and Exports": ["ISF_10.01.01|Supply Import Documentation", "ISF_10.01.02|Sample Import/Export Documentation"],
+                "10.02 Normal Ranges": ["ISF_10.02.01|Normal Ranges"],
+                "10.03 Qualifications": ["ISF_10.03.01|Facility Certification/Accreditation", "ISF_10.03.02|Head of Facility CV"],
+                "10.04 Retained Samples": ["ISF_10.04.01|Record of Retained Samples"],
+                "10.05 Results": ["ISF_10.05.01|Results Documentation"],
+                "10.06 Sample Storage": ["ISF_10.06.01|Sample Storage Condition Log"],
+                "10.07 Other Testing": ["ISF_10.07.01|Other Testing Facility Document"],
+                "10.08 Communications": ["ISF_10.08.01|Relevant Communications"]
+            },
+            "11 Monitoring Logs and Reports": {
+                "11.01 Monitoring Logs": ["ISF_11.01.01|Monitoring Log"],
+                "11.02 Pre Trial Visit": ["ISF_11.02.01|Pre Trial Monitoring Report"],
+                "11.03 Initiation Visit": ["ISF_11.03.01|Trial Initiation Monitoring Report"],
+                "11.04 Interim Visits": ["ISF_11.04.01|Monitoring Visit Report"],
+                "11.05 Close Out Visit": ["ISF_11.05.01|Final Trial Close Out Monitoring Report"],
+                "11.06 Other Monitoring": ["ISF_11.06.01|Additional Monitoring Activity"]
+            },
+            "12 Safety Events and Reports": {
+                "12.01 Safety Events at Site": ["ISF_12.01.01|Site Safety Report"],
+                "12.02 Sponsor Safety Reports": ["ISF_12.02.01|Expedited Sponsor Safety Report", "ISF_12.02.02|Notification of Safety Information", "ISF_12.02.03|PV Database Line Listing"],
+                "12.03 Data Monitoring": ["ISF_12.03.01|Data and Safety Monitoring Report"],
+                "12.04 Safety Communications": ["ISF_12.04.01|Relevant Communications"]
+            },
+            "13 Study Data and Logs": {
+                "13.01 Deviations": ["ISF_13.01.01|Protocol Deviations"],
+                "13.02 System Access": ["ISF_13.02.01|System Account Management"],
+                "13.03 Source Data Extracts": ["ISF_13.03.01|Data Clarification Document", "ISF_13.03.02|Corrections to Entered Data", "ISF_13.03.03|Final Participant Data"],
+                "13.04 Unblinding Documentation": ["ISF_13.04.01|Unblinding Document"]
+            },
+            "14 Correspondence and Notes": {
+                "14.01 Relevant Communications": ["ISF_14.01.01|Relevant Communication"],
+                "14.02 Filenotes": ["ISF_14.01.02|Filenote"]
+            }
+        };
+
+        function buildNav() {
+            const nav = document.getElementById('isf-navigator');
+            let total = 0;
+            Object.keys(isfModel).forEach(zone => {
+                const zoneDiv = document.createElement('div');
+                zoneDiv.innerHTML = `
+                    <div class="zone-header" onclick="toggleZ(this)">
+                        <i class="fas fa-folder" style="color:#f59e0b;"></i>
+                        <strong>${zone}</strong>
+                    </div>
+                    <div class="section-list">
+                        ${Object.keys(isfModel[zone]).map(sec => {
+                            total += isfModel[zone][sec].length;
+                            return `<div class="section-item" onclick="loadA('${zone}','${sec}',this)">
+                                ${sec} <span style="font-size:0.6rem; opacity:0.6;">(${isfModel[zone][sec].length})</span>
+                            </div>`;
+                        }).join('')}
+                    </div>
+                `;
+                nav.appendChild(zoneDiv);
+            });
+            document.getElementById('counter').innerText = `ISF Indexado: ${total} Documentos de Sitio`;
+        }
+
+        function toggleZ(el) {
+            const list = el.nextElementSibling;
+            const isOpen = list.style.display === 'block';
+            document.querySelectorAll('.section-list').forEach(l => l.style.display = 'none');
+            list.style.display = isOpen ? 'none' : 'block';
+        }
+
+        function loadA(zone, section, el) {
+            document.querySelectorAll('.section-item').forEach(i => i.classList.remove('active'));
+            el.classList.add('active');
+            document.getElementById('path').innerText = `ISF Zone ${zone.split(' ')[0]} > ${section}`;
+            document.getElementById('view-title').innerText = section;
+            
+            const table = document.getElementById('artifact-table');
+            table.innerHTML = '';
+            
+            isfModel[zone][section].forEach(entry => {
+                const [code, name] = entry.split('|');
+                table.innerHTML += `
+                    <tr>
+                        <td><span class="code-tag">${code}</span></td>
+                        <td style="font-weight:500;">${name}</td>
+                        <td><span class="status-pill st-present">Vigente</span></td>
+                        <td style="text-align:center;"><i class="fas fa-file-invoice" style="color:var(--siolta-blue); cursor:pointer;"></i></td>
+                    </tr>
+                `;
+            });
+        }
+        buildNav();
+    </script>
+</body>
+</html>
